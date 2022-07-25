@@ -3,7 +3,7 @@ A nix flake providing a home-manager module for VST emulation with yabridge, and
 
 # example usage
 ``flake.nix``:
-```
+```nix
 {
   # add as an input
   inputs.audio-plugins = {
