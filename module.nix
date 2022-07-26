@@ -41,7 +41,7 @@ in
     let
       yabridge = cfg.package;
       yabridgectl = cfg.ctlPackage;
-      toCommand = path: "${cfg.ctlPackage}/bin/yabridgectl add ${path}";
+      toCommand = path: "cp -r ${path} .";
       commands = map toCommand cfg.paths;
 
       # edit yabridge config to explicitly include extraPath
@@ -57,14 +57,12 @@ in
           export WINEPREFIX=$out/wine
           export XDG_CONFIG_HOME=$out/config
           export HOME=$out/home
-          PATH=${cfg.package}/bin:$PATH
-          echo "completed environment setup"
           ${cfg.ctlPackage}/bin/yabridgectl set --path=${cfg.package}/lib
-          echo "set yabridge path"
+          # copy all vst plugin folders to this directory
           ${builtins.concatStringsSep "\n" commands}
-          echo "added all directories to yabridge"
+          # add this folder and sync it
+          ${cfg.ctlPackage}/bin/yabridgectl add .
           ${cfg.ctlPackage}/bin/yabridgectl sync
-          echo "completed sync"
 
           ${patch}
         '';
@@ -78,8 +76,7 @@ in
 
       nativePlugins = pkgs.runCommandLocal "native-plugins-combined" { } copyCommands;
         
-      tracer = builtins.trace scriptContents scriptContents;
-      userYabridge = pkgs.runCommandLocal "yabridge-configuration" { } tracer;
+      userYabridge = pkgs.runCommandLocal "yabridge-configuration" { } scriptContents;
     in
     mkIf cfg.enable {
       home.packages = [ userYabridge yabridge yabridgectl ];
