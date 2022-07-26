@@ -13,6 +13,12 @@ in
       description = "Paths to folders which contain .vst and .vst3 plugins.";
     };
 
+    nativePaths = mkOption {
+      type = types.listOf types.str;
+      default = [ ];
+      description = "Paths to folders which contain plugins which will run natively on linux. They will be placed in the same folder as emulated VSTs.";
+    };
+
     extraPath = mkOption {
       type = types.str;
       default = "";
@@ -39,7 +45,7 @@ in
       commands = map toCommand cfg.paths;
 
       # edit yabridge config to explicitly include extraPath
-      escapedExtraPath = lib.strings.escape ["/"] cfg.extraPath;
+      escapedExtraPath = lib.strings.escape [ "/" ] cfg.extraPath;
       patch =
         if cfg.extraPath != "" then
           ''sed -i "3s/\]$/,'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml''
@@ -58,15 +64,27 @@ in
 
           ${patch}
         '';
+      
+      # create a script which will copy all the native plugins into its working directory
+      toCp = path: "cp -r ${path} $out";
+      copyCommands = ''
+        mkdir $out
+        ${builtins.concatStringsSep "\n" (map toCp cfg.nativePaths)}
+      '';
+
+      nativePlugins = pkgs.runCommandLocal "native-plugins-combined" { } copyCommands;
 
       userYabridge = pkgs.runCommandLocal "yabridge-configuration" { } scriptContents;
     in
     mkIf cfg.enable {
       home.packages = [ userYabridge yabridge yabridgectl ];
       home.file = {
-        ".vst3" = {
+        ".vst3/yabridge" = {
           source = "${userYabridge}/home/.vst3";
           recursive = true;
+        };
+        ".vst3/native" = {
+          source = "${nativePlugins}";
         };
 
         ".config/yabridgectl" = {

@@ -18,6 +18,9 @@ let
   ambifx = import ./synths/ambifx.nix { inherit pkgs; };
   fuzz-buddies = import ./synths/fuzz-buddies.nix { inherit pkgs; };
   meat-zone = import ./synths/meat-zone.nix { inherit pkgs; };
+
+  # TAL -----------------------------------------------------------------------
+  tal-reverb-4 = import ./native/effects/TAL-reverb-4.nix { inherit pkgs; };
 in
 {
   synths = {
@@ -33,6 +36,9 @@ in
   native = {
     synths = {
       dexed = import ./native/synths/dexed.nix { inherit pkgs; };
+    };
+    effects = {
+      inherit tal-reverb-4;
     };
   };
 
