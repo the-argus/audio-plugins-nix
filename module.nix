@@ -58,9 +58,13 @@ in
           export XDG_CONFIG_HOME=$out/config
           export HOME=$out/home
           PATH=${cfg.package}/bin:$PATH
+          echo "completed environment setup"
           ${cfg.ctlPackage}/bin/yabridgectl set --path=${cfg.package}/lib
+          echo "set yabridge path"
           ${builtins.concatStringsSep "\n" commands}
+          echo "added all directories to yabridge"
           ${cfg.ctlPackage}/bin/yabridgectl sync
+          echo "completed sync"
 
           ${patch}
         '';
