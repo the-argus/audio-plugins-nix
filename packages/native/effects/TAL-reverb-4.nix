@@ -9,4 +9,6 @@ pkgs.stdenv.mkDerivation {
   nativeBuildInputs = [ pkgs.unzip ];
 
   installPhase = "cp -r . $out";
+
+  sourceRoot = ".";
 }
