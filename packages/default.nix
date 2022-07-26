@@ -21,6 +21,10 @@ let
 
   # TAL -----------------------------------------------------------------------
   tal-reverb-4 = import ./native/effects/TAL-reverb-4.nix { inherit pkgs; };
+
+  # VARIETY OF SOUND ----------------------------------------------------------
+  # found at https://varietyofsound.wordpress.com/downloads/
+  ferric-tds = import ./effects/ferric-tds.nix { inherit pkgs; };
 in
 {
   synths = {
@@ -31,6 +35,8 @@ in
   effects = {
     # HECKSCAPER
     inherit ambifx fuzz-buddies meat-zone;
+    # VOS
+    inherit ferric-tds;
   };
 
   native = {
