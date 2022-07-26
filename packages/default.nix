@@ -3,6 +3,7 @@
   synths = {
     ct0w0 = import ./synths/ct-0w0.nix { inherit pkgs; };
     ctws1 = import ./synths/ct-ws1.nix { inherit pkgs; };
+    ambi-vac = import ./synths/ambi-vac.nix { inherit pkgs; };
   };
 
   effects = {
