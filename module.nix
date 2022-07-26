@@ -80,7 +80,7 @@ in
       home.packages = [ userYabridge yabridge yabridgectl ];
       home.file = {
         ".vst3/yabridge" = {
-          source = "${userYabridge}/home/.vst3";
+          source = "${userYabridge}/home/.vst3/yabridge";
           recursive = true;
         };
         ".vst3/native" = {
