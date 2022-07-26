@@ -41,7 +41,7 @@ in
     let
       yabridge = cfg.package;
       yabridgectl = cfg.ctlPackage;
-      toCommand = path: "cp -r ${path} .";
+      toCommand = path: "cp -r ${path} $out";
       commands = map toCommand cfg.paths;
 
       # edit yabridge config to explicitly include extraPath
@@ -58,10 +58,10 @@ in
           export XDG_CONFIG_HOME=$out/config
           export HOME=$out/home
           ${cfg.ctlPackage}/bin/yabridgectl set --path=${cfg.package}/lib
-          # copy all vst plugin folders to this directory
+          # copy all vst plugin folders to out directory
           ${builtins.concatStringsSep "\n" commands}
           # add this folder and sync it
-          ${cfg.ctlPackage}/bin/yabridgectl add .
+          ${cfg.ctlPackage}/bin/yabridgectl add $out
           ${cfg.ctlPackage}/bin/yabridgectl sync
 
           ${patch}
