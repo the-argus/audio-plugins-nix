@@ -75,8 +75,9 @@ in
       '';
 
       nativePlugins = pkgs.runCommandLocal "native-plugins-combined" { } copyCommands;
-        
-      userYabridge = pkgs.runCommandLocal "yabridge-configuration" { } scriptContents;
+      
+      tracer = builtins.trace scriptContents scriptContents;
+      userYabridge = pkgs.runCommandLocal "yabridge-configuration" { } tracer;
     in
     mkIf cfg.enable {
       home.packages = [ userYabridge yabridge yabridgectl ];
