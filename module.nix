@@ -83,8 +83,12 @@ in
     mkIf cfg.enable {
       home.packages = [ userYabridge yabridge yabridgectl ];
       home.file = {
-        ".vst3/yabridge" = {
+        ".vst/yabridge" = {
           source = "${userYabridge}/home/.vst3/yabridge";
+          recursive = true;
+        };
+        ".vst/yabridge-vst2" = {
+          source = "${userYabridge}/home/.vst/yabridge";
           recursive = true;
         };
         ".vst3/native" = {
