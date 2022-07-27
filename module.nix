@@ -25,6 +25,12 @@ in
       description = "An out-of-store path to append to yabridge configuration. Must be added to your DAW's VST search path.";
     };
 
+    vstDirectory = mkOption {
+        type = types.str;
+        default = ".vst";
+        description = "Path relative to your home directory where vst plugins will be installed.";
+    };
+
     package = mkOption {
       type = types.package;
       default = pkgs.yabridge;
@@ -83,15 +89,15 @@ in
     mkIf cfg.enable {
       home.packages = [ userYabridge yabridge yabridgectl ];
       home.file = {
-        ".vst/yabridge" = {
+        "${cfg.vstDirectory}/yabridge" = {
           source = "${userYabridge}/home/.vst3/yabridge";
           recursive = true;
         };
-        ".vst/yabridge-vst2" = {
+        "${cfg.vstDirectory}/yabridge-vst2" = {
           source = "${userYabridge}/home/.vst/yabridge";
           recursive = true;
         };
-        ".vst3/native" = {
+        "${cfg.vstDirectory}/native" = {
           source = "${nativePlugins}";
         };
 
