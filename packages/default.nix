@@ -22,6 +22,7 @@ let
 
   # TAL -----------------------------------------------------------------------
   tal-reverb-4 = import ./native/effects/TAL-reverb-4.nix { inherit pkgs; };
+  tal-filter-2 = import ./native/effects/TAL-filter-2.nix { inherit pkgs; };
 
   # VARIETY OF SOUND ----------------------------------------------------------
   # found at https://varietyofsound.wordpress.com/downloads/
@@ -45,7 +46,7 @@ in
       dexed = import ./native/synths/dexed.nix { inherit pkgs; };
     };
     effects = {
-      inherit tal-reverb-4;
+      inherit tal-reverb-4 tal-filter-2;
     };
   };
 
