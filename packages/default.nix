@@ -15,9 +15,10 @@ let
   sota = import ./synths/sota.nix { inherit pkgs; };
   virtua-dub = import ./synths/virtua-dub.nix { inherit pkgs; };
 
-  ambifx = import ./synths/ambifx.nix { inherit pkgs; };
-  fuzz-buddies = import ./synths/fuzz-buddies.nix { inherit pkgs; };
-  meat-zone = import ./synths/meat-zone.nix { inherit pkgs; };
+  ambifx = import ./effects/ambifx.nix { inherit pkgs; };
+  fuzz-buddies = import ./effects/fuzz-buddies.nix { inherit pkgs; };
+  meat-zone = import ./effects/meat-zone.nix { inherit pkgs; };
+  deletr = import ./effects/deletr.nix { inherit pkgs; };
 
   # TAL -----------------------------------------------------------------------
   tal-reverb-4 = import ./native/effects/TAL-reverb-4.nix { inherit pkgs; };
@@ -34,7 +35,7 @@ in
 
   effects = {
     # HECKSCAPER
-    inherit ambifx fuzz-buddies meat-zone;
+    inherit ambifx fuzz-buddies meat-zone deletr;
     # VOS
     inherit ferric-tds;
   };
@@ -51,6 +52,6 @@ in
   # sets meant to be concatenated with your programs.yabridge.paths
   sets = {
     # all heckscaper plugins
-    heckscaper = [ ct0w0 ctws1 ambi-vac damascus great-wall ill-logic ktso nuxx ouch psykic real-animal sota virtua-dub ambifx fuzz-buddies meat-zone ];
+    heckscaper = [ ct0w0 ctws1 ambi-vac damascus great-wall ill-logic ktso nuxx ouch psykic real-animal sota virtua-dub ambifx fuzz-buddies meat-zone deletr ];
   };
 }
