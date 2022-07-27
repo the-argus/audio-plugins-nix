@@ -41,8 +41,10 @@ in
     let
       yabridge = cfg.package;
       yabridgectl = cfg.ctlPackage;
-      toCommand = path: "cp -r ${path} $out";
-      commands = map toCommand cfg.paths;
+      toCpCommand = path: "cp -r ${path} $out";
+      toYabridgeCommand = path: "${cfg.ctlPackage}/bin/yabridgectl add ./${(builtins.baseNameOf path)}";
+      cpCommands = map toCpCommand cfg.paths;
+      yabridgeCommands = map toYabridgeCommand cfg.paths;
 
       # edit yabridge config to explicitly include extraPath
       escapedExtraPath = lib.strings.escape [ "/" ] cfg.extraPath;
@@ -59,19 +61,18 @@ in
           export HOME=$out/home
           ${cfg.ctlPackage}/bin/yabridgectl set --path=${cfg.package}/lib
           # copy all vst plugin folders to out directory
-          ${builtins.concatStringsSep "\n" commands}
+          ${builtins.concatStringsSep "\n" cpCommands}
+          ${builtins.concatStringsSep "\n" yabridgeCommands}
           # add this folder and sync it
-          ${cfg.ctlPackage}/bin/yabridgectl add $out
           ${cfg.ctlPackage}/bin/yabridgectl sync
 
           ${patch}
         '';
       
       # create a script which will copy all the native plugins into its working directory
-      toCp = path: "cp -r ${path} $out";
       copyCommands = ''
         mkdir $out
-        ${builtins.concatStringsSep "\n" (map toCp cfg.nativePaths)}
+        ${builtins.concatStringsSep "\n" (map toCpCommand cfg.nativePaths)}
       '';
 
       nativePlugins = pkgs.runCommandLocal "native-plugins-combined" { } copyCommands;
