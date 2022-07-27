@@ -1,5 +1,4 @@
 { pkgs, ... }:
-{ pkgs, ... }:
 pkgs.stdenv.mkDerivation {
   name = "TAL-Reverb-4";
   src = pkgs.fetchurl {
