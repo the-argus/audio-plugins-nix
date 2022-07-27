@@ -16,7 +16,7 @@ pkgs.stdenv.mkDerivation {
         src = pkgs.fetchurl {
           url = "https://tal-software.com//downloads/presets/TAL-Filter-2%20vst3.zip";
           sha256 = "0pxmcdgv7d7ppi22dc7irffr2bnx3k81bpgh0prg6vq1akwv9kjb";
-          name = "TAL-Filter-2_Vst_Presets_src";
+          name = "TAL-Filter-2_Vst_Presets_src.zip";
         };
         nativeBuildInputs = [ pkgs.unzip ];
 

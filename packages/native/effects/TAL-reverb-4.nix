@@ -16,7 +16,7 @@ pkgs.stdenv.mkDerivation {
         src = pkgs.fetchurl {
           url = "https://tal-software.com//downloads/presets/TAL-Reverb-4%20vst3.zip";
           sha256 = "1x7d73hc5hbbs7z541ra4yvpfp7066ilscgw1jwb6d08xpzcbi6z";
-          name = "TAL-Reverb-4_Vst_Presets_src";
+          name = "TAL-Reverb-4_Vst_Presets_src.zip";
         };
         nativeBuildInputs = [ pkgs.unzip ];
 
