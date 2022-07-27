@@ -42,7 +42,7 @@ in
       yabridge = cfg.package;
       yabridgectl = cfg.ctlPackage;
       toCpCommand = path: "cp -r ${path} $out";
-      toYabridgeCommand = path: "${cfg.ctlPackage}/bin/yabridgectl add ./${(builtins.baseNameOf path)}";
+      toYabridgeCommand = path: "${cfg.ctlPackage}/bin/yabridgectl add $out/${(builtins.baseNameOf path)}";
       cpCommands = map toCpCommand cfg.paths;
       yabridgeCommands = map toYabridgeCommand cfg.paths;
 
