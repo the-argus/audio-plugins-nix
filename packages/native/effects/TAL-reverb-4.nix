@@ -1,21 +1,5 @@
 { pkgs, ... }:
 { pkgs, ... }:
-let
-  # basically just a fetchzip of the download for the presets for this plugin
-  vstPresets = pkgs.stdenv.mkDerivation {
-    name = "TAL-Reverb-4_Vst_Presets";
-    src = pkgs.fetchurl {
-      url = "https://tal-software.com//downloads/presets/TAL-Reverb-4%20vst3.zip";
-      sha256 = "1l9g4rywcjb7blbwccn5qpd1xpgwxaa98fcypyv4piikljvrbrsr";
-      name = "TAL-Reverb-4_Vst_Presets_src";
-    };
-    nativeBuildInputs = [ pkgs.unzip ];
-
-    installPhase = "cp -r . $out";
-
-    sourceRoot = ".";
-  };
-in
 pkgs.stdenv.mkDerivation {
   name = "TAL-Reverb-4";
   src = pkgs.fetchurl {
@@ -25,7 +9,27 @@ pkgs.stdenv.mkDerivation {
 
   nativeBuildInputs = [ pkgs.unzip ];
 
-  installPhase = "cp -r . $out";
+  installPhase =
+    let
+      # basically just a fetchzip of the download for the presets for this plugin
+      vstPresets = pkgs.stdenv.mkDerivation {
+        name = "TAL-Reverb-4_Vst_Presets";
+        src = pkgs.fetchurl {
+          url = "https://tal-software.com//downloads/presets/TAL-Reverb-4%20vst3.zip";
+          sha256 = "1l9g4rywcjb7blbwccn5qpd1xpgwxaa98fcypyv4piikljvrbrsr";
+          name = "TAL-Reverb-4_Vst_Presets_src";
+        };
+        nativeBuildInputs = [ pkgs.unzip ];
+
+        installPhase = "cp -r . $out";
+
+        sourceRoot = ".";
+      };
+    in
+    ''
+      cp -r . $out
+      cp -r ${vstPresets} $out/presets
+    '';
 
   sourceRoot = ".";
 }
