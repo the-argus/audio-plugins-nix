@@ -21,8 +21,12 @@ let
   deletr = import ./effects/deletr.nix { inherit pkgs; };
 
   # TAL -----------------------------------------------------------------------
+  tal-noisemaker = import ./native/synths/TAL-noisemaker.nix { inherit pkgs; };
+
   tal-reverb-4 = import ./native/effects/TAL-reverb-4.nix { inherit pkgs; };
   tal-filter-2 = import ./native/effects/TAL-filter-2.nix { inherit pkgs; };
+  tal-chorus = import ./native/effects/TAL-chorus.nix { inherit pkgs; };
+  tal-vocoder = import ./native/effects/TAL-vocoder.nix { inherit pkgs; };
 
   # VARIETY OF SOUND ----------------------------------------------------------
   # found at https://varietyofsound.wordpress.com/downloads/
@@ -44,9 +48,11 @@ in
   native = {
     synths = {
       dexed = import ./native/synths/dexed.nix { inherit pkgs; };
+      # TAL
+      inherit tal-noisemaker;
     };
     effects = {
-      inherit tal-reverb-4 tal-filter-2;
+      inherit tal-reverb-4 tal-filter-2 tal-vocoder tal-chorus;
     };
   };
 
