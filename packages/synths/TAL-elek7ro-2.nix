@@ -1,5 +1,5 @@
 { pkgs, ... }:
-builtins.trace ''WARNING: TAL Elek7ro is deprecated software and recieves no updates.''
+builtins.trace ''WARNING: TAL Elek7ro is deprecated software and recieves no updates or support.''
 pkgs.stdenv.mkDerivation {
   name = "TAL-elek7ro";
   src = pkgs.fetchurl {

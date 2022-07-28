@@ -22,7 +22,11 @@ let
 
   # TAL -----------------------------------------------------------------------
   tal-elek7ro-2 = import ./synths/TAL-elek7ro-2.nix { inherit pkgs; };
-  tal-bassline = import ./synths/TAL-bassline.nix {inherit pkgs; };
+  tal-bassline = import ./synths/TAL-bassline.nix { inherit pkgs; };
+
+  tal-dub = import ./effects/TAL-dub.nix { inherit pkgs; };
+  tal-dub-2 = import ./effects/TAL-dub-2.nix { inherit pkgs; };
+  tal-dub-3 = import ./effects/TAL-dub-3.nix { inherit pkgs; };
 
   # native TAL
   tal-noisemaker = import ./native/synths/TAL-noisemaker.nix { inherit pkgs; };
@@ -41,7 +45,7 @@ in
     # HECKSCAPER
     inherit ct0w0 ctws1 ambi-vac damascus great-wall ill-logic ktso nuxx ouch psykic real-animal sota virtua-dub;
     #TAL
-    inherit tal-elek7ro-2;
+    inherit tal-elek7ro-2 tal-bassline;
   };
 
   effects = {
@@ -49,6 +53,8 @@ in
     inherit ambifx fuzz-buddies meat-zone deletr;
     # VOS
     inherit ferric-tds;
+    # TAL
+    inherit tal-dub tal-dub-2 tal-dub-3;
   };
 
   native = {
