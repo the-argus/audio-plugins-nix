@@ -21,6 +21,9 @@ let
   deletr = import ./effects/deletr.nix { inherit pkgs; };
 
   # TAL -----------------------------------------------------------------------
+  tal-elek7ro-2 = import ./synths/TAL-elek7ro-2.nix { inherit pkgs; };
+
+  # native TAL
   tal-noisemaker = import ./native/synths/TAL-noisemaker.nix { inherit pkgs; };
 
   tal-reverb-4 = import ./native/effects/TAL-reverb-4.nix { inherit pkgs; };
@@ -36,6 +39,8 @@ in
   synths = {
     # HECKSCAPER
     inherit ct0w0 ctws1 ambi-vac damascus great-wall ill-logic ktso nuxx ouch psykic real-animal sota virtua-dub;
+    #TAL
+    inherit tal-elek7ro-2;
   };
 
   effects = {
