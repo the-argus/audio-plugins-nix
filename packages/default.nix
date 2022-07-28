@@ -22,6 +22,7 @@ let
 
   # TAL -----------------------------------------------------------------------
   tal-elek7ro-2 = import ./synths/TAL-elek7ro-2.nix { inherit pkgs; };
+  tal-bassline = import ./synths/TAL-bassline.nix {inherit pkgs; };
 
   # native TAL
   tal-noisemaker = import ./native/synths/TAL-noisemaker.nix { inherit pkgs; };
