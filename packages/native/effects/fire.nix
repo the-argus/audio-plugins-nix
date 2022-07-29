@@ -46,6 +46,7 @@ pkgs.stdenv.mkDerivation {
     ''
       mkdir -p ./build/_deps/
       cp -r ${juce-src} ./build/_deps/juce-src
+      chmod +w ./build/_deps/juce-src -R
     '';
 
   buildPhase =
