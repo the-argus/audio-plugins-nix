@@ -60,6 +60,7 @@ pkgs.stdenv.mkDerivation
     in
     # this could cause problems... but cmake seems to prepend buildir/packagename-versionnumber to the src subdirectories
     ''
+      mkdir ./build/${pname}-${version}
       cp -r ${juce-src} ./build/${pname}-${version}/JUCE
       cp -r ${rwq-src} ./build/${pname}-${version}/readerwriterqueue
       chmod +w ./JUCE -R
