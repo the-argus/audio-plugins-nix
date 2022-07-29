@@ -78,7 +78,7 @@ in
         TAL = [ tal-reverb-4 tal-filter-2 tal-vocoder tal-chorus tal-noisemaker ];
     };
 
-    TAL = [ tal-dub tal-dub-2 tal-dub-3 tal-bitcrusher tal-tube tal-use tal-uno62 ];
+    TAL = [ tal-dub tal-dub-2 tal-dub-3 tal-bitcrusher tal-tube tal-use tal-uno62 tal-elek7ro-2 tal-bassline ];
     # all heckscaper plugins
     heckscaper = [ ct0w0 ctws1 ambi-vac damascus great-wall ill-logic ktso nuxx ouch psykic real-animal sota virtua-dub ambifx fuzz-buddies meat-zone deletr ];
   };
