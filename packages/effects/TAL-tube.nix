@@ -7,6 +7,8 @@ pkgs.stdenv.mkDerivation {
     sha256 = "0qldgqj9nay1vd7r2mifjay2mz0y459lvkj9w096zqwzr90kw978";
   };
 
+  setRoot = ".";
+
   nativeBuildInputs = [ pkgs.unzip ];
 
   installPhase = "cp -r . $out";
