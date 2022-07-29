@@ -6,6 +6,8 @@ pkgs.stdenv.mkDerivation {
     url = "https://tal-software.com//downloads/plugins/TAL-U-No-62-x64.zip";
     sha256 = "09lqdxh8gya9kvs2b8w7h9lrrrajbmj3pzgc3xm8vb9g94ax7hvj";
   };
+  
+  sourceRoot = ".";
 
   nativeBuildInputs = [ pkgs.unzip ];
 
