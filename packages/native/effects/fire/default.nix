@@ -63,8 +63,8 @@ pkgs.stdenv.mkDerivation
       mkdir -p ./build/${pname}-${version}
       cp -r ${juce-src} ./build/${pname}-${version}/JUCE
       cp -r ${rwq-src} ./build/${pname}-${version}/readerwriterqueue
-      chmod +w ./JUCE -R
-      chmod +w ./readerwriterqueue -R
+      chmod +w ./build/${pname}-${version}/JUCE -R
+      chmod +w ./build/${pname}-${version}/readerwriterqueue -R
     '';
 
   buildPhase =
