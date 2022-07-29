@@ -55,20 +55,20 @@ pkgs.stdenv.mkDerivation {
       };
     in
     ''
-      cp -r ${juce-src} $src/JUCE
-      cp -r ${rwq-src} $src/readerwriterqueue
-      chmod +w $src/JUCE -R
-      chmod +w $src/readerwriterqueue -R
+      cp -r ${juce-src} ./JUCE
+      cp -r ${rwq-src} ./readerwriterqueue
+      chmod +w ./JUCE -R
+      chmod +w ./readerwriterqueue -R
     '';
 
   buildPhase =
     '' 
-      cmake -S $src -B $src/build
+      cmake -S . -B $src/build
     '';
 
   installPhase = ''
     mkdir $out
-    cd $src/build
+    cd ./build
     cp -r . $out
   '';
 }
