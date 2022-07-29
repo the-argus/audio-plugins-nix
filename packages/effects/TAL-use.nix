@@ -6,6 +6,8 @@ pkgs.stdenv.mkDerivation {
     url = "https://tal-software.com//downloads/plugins/TAL-USE.zip";
     sha256 = "1g7spid005nc4z2kz81v3xhjwqf5s1qx71b1vfwnc2b6wnqmi7rx";
   };
+  
+  sourceRoot = ".";
 
   nativeBuildInputs = [ pkgs.unzip ];
 

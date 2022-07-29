@@ -6,6 +6,8 @@ pkgs.stdenv.mkDerivation {
     url = "https://tal-software.com//downloads/plugins/TAL-Bitcrusher-x64.zip";
     sha256 = "07ynksrnwwfbq8jvydmcj5mqr8cjvj9wsq0i4m3h974sm6hf6k6g";
   };
+  
+  sourceRoot = ".";
 
   nativeBuildInputs = [ pkgs.unzip ];
 

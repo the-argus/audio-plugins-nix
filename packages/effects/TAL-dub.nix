@@ -6,6 +6,8 @@ pkgs.stdenv.mkDerivation {
     url = "https://tal-software.com//downloads/plugins/TAL-Dub-x64.zip";
     sha256 = "0ryl38x8n9z1g0n52wiza90syz41vl9wdrkgykgb1bzf6fc3zb7j";
   };
+  
+  sourceRoot = ".";
 
   nativeBuildInputs = [ pkgs.unzip ];
 
