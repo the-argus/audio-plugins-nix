@@ -58,18 +58,18 @@ pkgs.stdenv.mkDerivation
         leaveDotGit = false;
       };
     in
-    # this could cause problems... but cmake seems to prepend buildir/packagename-versionnumber to the src subdirectories
     ''
-      mkdir -p ./build/${pname}-${version}
-      cp -r ${juce-src} ./build/${pname}-${version}/JUCE
-      cp -r ${rwq-src} ./build/${pname}-${version}/readerwriterqueue
-      chmod +w ./build/${pname}-${version}/JUCE -R
-      chmod +w ./build/${pname}-${version}/readerwriterqueue -R
+      ls
+      pwd
+      cp -r ${juce-src} ./JUCE
+      cp -r ${rwq-src} ./readerwriterqueue
+      chmod +w ./JUCE -R
+      chmod +w ./readerwriterqueue -R
     '';
 
   buildPhase =
     '' 
-      cmake -S . -B $src/build
+      cmake -S . -B ./build
     '';
 
   installPhase = ''
