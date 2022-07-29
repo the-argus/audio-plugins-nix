@@ -29,7 +29,7 @@ pkgs.stdenv.mkDerivation {
     pcre
   ];
 
-  patchPhase =
+  postConfigure =
     let
       juce-src = pkgs.fetchgit {
         url = "https://github.com/juce-framework/JUCE.git";
