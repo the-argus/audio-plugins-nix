@@ -82,7 +82,11 @@ in
       inherit tal-noisemaker tal-bassline-101 tal-drum tal-j8 tal-sampler tal-unolx tal-mod tal-dac tal-dub-x;
     };
     effects = {
+      # TAL
       inherit tal-reverb-4 tal-filter-2 tal-vocoder tal-chorus;
+
+      # jerryuhoo 
+      inherit fire fire-bin;
     };
   };
 
