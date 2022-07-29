@@ -27,6 +27,9 @@ let
   tal-dub = import ./effects/TAL-dub.nix { inherit pkgs; };
   tal-dub-2 = import ./effects/TAL-dub-2.nix { inherit pkgs; };
   tal-dub-3 = import ./effects/TAL-dub-3.nix { inherit pkgs; };
+  tal-bitcrusher = import ./effects/TAL-bitcrusher.nix { inherit pkgs; };
+  tal-use = import ./effects/TAL-use.nix { inherit pkgs; };
+  tal-tube = import ./effects/TAL-tube.nix { inherit pkgs; };
 
   # native TAL
   tal-noisemaker = import ./native/synths/TAL-noisemaker.nix { inherit pkgs; };
@@ -54,7 +57,7 @@ in
     # VOS
     inherit ferric-tds;
     # TAL
-    inherit tal-dub tal-dub-2 tal-dub-3;
+    inherit tal-dub tal-dub-2 tal-dub-3 tal-bitcrusher tal-tube tal-use;
   };
 
   native = {
@@ -70,6 +73,11 @@ in
 
   # sets meant to be concatenated with your programs.yabridge.paths
   sets = {
+    native = {
+        TAL = [ tal-reverb-4 tal-filter-2 tal-vocoder tal-chorus ];
+    };
+
+    TAL = [ tal-dub tal-dub-2 tal-dub-3 tal-bitcrusher tal-tube tale-use ];
     # all heckscaper plugins
     heckscaper = [ ct0w0 ctws1 ambi-vac damascus great-wall ill-logic ktso nuxx ouch psykic real-animal sota virtua-dub ambifx fuzz-buddies meat-zone deletr ];
   };
