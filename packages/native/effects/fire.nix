@@ -12,6 +12,7 @@ pkgs.stdenv.mkDerivation {
   nativeBuildInputs = with pkgs; [
     cmake
     pkgconfig
+    git
     xorg.libX11
     xorg.libXrandr
     xorg.libXinerama
