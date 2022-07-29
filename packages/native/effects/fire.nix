@@ -10,9 +10,22 @@ pkgs.stdenv.mkDerivation {
   };
 
   nativeBuildInputs = with pkgs; [
-    cmake pkgconfig
+    cmake
+    pkgconfig
     xorg.libX11
     xorg.libXrandr
+    xorg.libXinerama
+    xorg.libXext
+    xorg.libXcursor
+    freetype
+
+    # extra modules
+    alsaLib
+    gtk3-x11
+    webkitgtk
+
+    # pkgconfig
+    pcre
   ];
 
   buildPhase = ''
@@ -20,6 +33,7 @@ pkgs.stdenv.mkDerivation {
   '';
 
   installPhase = ''
+    mkdir $out
     cd build
     cp -r . $out
   '';
