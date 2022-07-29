@@ -23,6 +23,7 @@ let
   # TAL -----------------------------------------------------------------------
   tal-elek7ro-2 = import ./synths/TAL-elek7ro-2.nix { inherit pkgs; };
   tal-bassline = import ./synths/TAL-bassline.nix { inherit pkgs; };
+  tal-uno62 = import ./synths/TAL-u-no-62.nix { inherit pkgs; };
 
   tal-dub = import ./effects/TAL-dub.nix { inherit pkgs; };
   tal-dub-2 = import ./effects/TAL-dub-2.nix { inherit pkgs; };
@@ -48,7 +49,7 @@ in
     # HECKSCAPER
     inherit ct0w0 ctws1 ambi-vac damascus great-wall ill-logic ktso nuxx ouch psykic real-animal sota virtua-dub;
     #TAL
-    inherit tal-elek7ro-2 tal-bassline;
+    inherit tal-elek7ro-2 tal-bassline tal-uno62;
   };
 
   effects = {
@@ -74,10 +75,10 @@ in
   # sets meant to be concatenated with your programs.yabridge.paths
   sets = {
     native = {
-        TAL = [ tal-reverb-4 tal-filter-2 tal-vocoder tal-chorus ];
+        TAL = [ tal-reverb-4 tal-filter-2 tal-vocoder tal-chorus tal-noisemaker ];
     };
 
-    TAL = [ tal-dub tal-dub-2 tal-dub-3 tal-bitcrusher tal-tube tale-use ];
+    TAL = [ tal-dub tal-dub-2 tal-dub-3 tal-bitcrusher tal-tube tal-use tal-uno62 ];
     # all heckscaper plugins
     heckscaper = [ ct0w0 ctws1 ambi-vac damascus great-wall ill-logic ktso nuxx ouch psykic real-animal sota virtua-dub ambifx fuzz-buddies meat-zone deletr ];
   };
