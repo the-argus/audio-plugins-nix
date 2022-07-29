@@ -34,6 +34,14 @@ let
 
   # native TAL
   tal-noisemaker = import ./native/synths/TAL-noisemaker.nix { inherit pkgs; };
+  tal-bassline-101 = import ./native/synths/TAL-bassline-101.nix { inherit pkgs; };
+  tal-drum = import ./native/synths/TAL-drum.nix { inherit pkgs; };
+  tal-j8 = import ./native/synths/TAL-j8.nix { inherit pkgs; };
+  tal-sampler = import ./native/synths/TAL-sampler.nix { inherit pkgs; };
+  tal-unolx = import ./native/synths/TAL-u-no-lx.nix { inherit pkgs; };
+  tal-mod = import ./native/synths/TAL-mod.nix { inherit pkgs; };
+  tal-dub-x = import ./native/synths/TAL-dub-x.nix { inherit pkgs; };
+  tal-dac = import ./native/synths/TAL-DAC.nix { inherit pkgs; };
 
   tal-reverb-4 = import ./native/effects/TAL-reverb-4.nix { inherit pkgs; };
   tal-filter-2 = import ./native/effects/TAL-filter-2.nix { inherit pkgs; };
@@ -65,7 +73,7 @@ in
     synths = {
       dexed = import ./native/synths/dexed.nix { inherit pkgs; };
       # TAL
-      inherit tal-noisemaker;
+      inherit tal-noisemaker tal-bassline-101 tal-drum tal-j8 tal-sampler tal-unolx tal-mod tal-dac tal-dub-x;
     };
     effects = {
       inherit tal-reverb-4 tal-filter-2 tal-vocoder tal-chorus;
@@ -75,7 +83,7 @@ in
   # sets meant to be concatenated with your programs.yabridge.paths
   sets = {
     native = {
-        TAL = [ tal-reverb-4 tal-filter-2 tal-vocoder tal-chorus tal-noisemaker ];
+      TAL = [ tal-reverb-4 tal-filter-2 tal-vocoder tal-chorus tal-noisemaker tal-dac tal-dub-x tal-mod tal-unolx tal-sampler tal-j8 tal-drum tal-bassline-101 ];
     };
 
     TAL = [ tal-dub tal-dub-2 tal-dub-3 tal-bitcrusher tal-tube tal-use tal-uno62 tal-elek7ro-2 tal-bassline ];
