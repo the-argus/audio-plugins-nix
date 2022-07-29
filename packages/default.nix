@@ -54,7 +54,7 @@ let
 
   # jerryuhoo
   fire-bin = import ./native/effects/fire-bin.nix { inherit pkgs; };
-  fire = import ./native/effects/fire.nix { inherit pkgs; };
+  fire = import ./native/effects/fire { inherit pkgs; };
 in
 {
   synths = {
