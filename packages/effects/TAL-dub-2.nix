@@ -1,5 +1,5 @@
 { pkgs, ... }:
-builtins.trace ''WARNING: TAL Dub 2 is deprecated software and recieves no updates or support.''
+pkgs.lib.trivial.warn ''WARNING: TAL Dub 2 is deprecated software and recieves no updates or support.''
 pkgs.stdenv.mkDerivation {
   name = "TAL-dub-2";
   src = pkgs.fetchurl {
