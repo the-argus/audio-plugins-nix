@@ -7,10 +7,11 @@ pkgs.stdenv.mkDerivation
 {
   inherit pname version;
 
-  src = pkgs.fetchurl {
-    url = "https://github.com/jerryuhoo/Fire/archive/refs/tags/v1.0.0.tar.gz";
-    sha256 = "1bm11fpwf4iknyjpjvxdmxw8gcmmlvyqpn40mgly31j8x3lq2x5b";
-    name = "Fire-1.0.0-src.tar.gz";
+  src = pkgs.fetchgit {
+    url = "https://github.com/jerryuhoo/Fire";
+    rev = "971ea15e6caebe5881184239a299b51a10ecaccf";
+    sha256 = "0wjps2b9g9482n8xqm7kcj19n30h6xfv4wwsp8srpazpn5ylqjl6";
+    fetchSubmodules = true; # get JUCE
   };
 
   nativeBuildInputs = with pkgs; [
@@ -38,15 +39,15 @@ pkgs.stdenv.mkDerivation
 
   postPatch =
     let
-      juce-src = pkgs.fetchgit {
-        url = "https://github.com/juce-framework/JUCE.git";
-        rev = "4c43bf429e90690cb1f05b7c8a044cc9f5a59e7d";
-        sha256 = "07ncsgis18gnbpcya85ikgykldnaj5xmyfcrdjm2rzzg30f9n07h";
-        fetchLFS = false;
-        fetchSubmodules = false;
-        deepClone = false;
-        leaveDotGit = false;
-      };
+      # juce-src = pkgs.fetchgit {
+      #   url = "https://github.com/juce-framework/JUCE.git";
+      #   rev = "4c43bf429e90690cb1f05b7c8a044cc9f5a59e7d";
+      #   sha256 = "07ncsgis18gnbpcya85ikgykldnaj5xmyfcrdjm2rzzg30f9n07h";
+      #   fetchLFS = false;
+      #   fetchSubmodules = false;
+      #   deepClone = false;
+      #   leaveDotGit = false;
+      # };
 
       rwq-src = pkgs.fetchgit {
         url = "https://github.com/cameron314/readerwriterqueue";
@@ -59,9 +60,9 @@ pkgs.stdenv.mkDerivation
       };
     in
     ''
-      ls
+      ls JUCE
       pwd
-      cp -r ${juce-src} ./JUCE
+      # cp -r ${juce-src} ./JUCE
       cp -r ${rwq-src} ./readerwriterqueue
       chmod +w ./JUCE -R
       chmod +w ./readerwriterqueue -R
