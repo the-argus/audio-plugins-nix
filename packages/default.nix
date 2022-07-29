@@ -51,6 +51,10 @@ let
   # VARIETY OF SOUND ----------------------------------------------------------
   # found at https://varietyofsound.wordpress.com/downloads/
   ferric-tds = import ./effects/ferric-tds.nix { inherit pkgs; };
+
+  # jerryuhoo
+  fire-bin = import ./native/effects/fire-bin.nix { inherit pkgs; };
+  fire = import ./native/effects/fire.nix { inherit pkgs; };
 in
 {
   synths = {
@@ -67,6 +71,8 @@ in
     inherit ferric-tds;
     # TAL
     inherit tal-dub tal-dub-2 tal-dub-3 tal-bitcrusher tal-tube tal-use;
+    # jerryuhoo
+    inherit fire fire-bin;
   };
 
   native = {
