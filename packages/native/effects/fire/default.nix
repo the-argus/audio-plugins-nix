@@ -59,10 +59,10 @@ pkgs.stdenv.mkDerivation
         leaveDotGit = false;
       };
     in
+      # cp -r ${juce-src} ./JUCE
     ''
       ls JUCE
       pwd
-      # cp -r ${juce-src} ./JUCE
       cp -r ${rwq-src} ./readerwriterqueue
       chmod +w ./JUCE -R
       chmod +w ./readerwriterqueue -R
