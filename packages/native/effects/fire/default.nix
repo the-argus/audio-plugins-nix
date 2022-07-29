@@ -1,7 +1,11 @@
 { pkgs, ... }:
-pkgs.stdenv.mkDerivation {
+let
   pname = "Fire";
   version = "1.0.0";
+in
+pkgs.stdenv.mkDerivation 
+{
+  inherit pname version;
 
   src = pkgs.fetchurl {
     url = "https://github.com/jerryuhoo/Fire/archive/refs/tags/v1.0.0.tar.gz";
@@ -54,9 +58,10 @@ pkgs.stdenv.mkDerivation {
         leaveDotGit = false;
       };
     in
+    # this could cause problems... but cmake seems to prepend buildir/packagename-versionnumber to the src subdirectories
     ''
-      cp -r ${juce-src} ./JUCE
-      cp -r ${rwq-src} ./readerwriterqueue
+      cp -r ${juce-src} ./build/${pname}-${version}/JUCE
+      cp -r ${rwq-src} ./build/${pname}-${version}/readerwriterqueue
       chmod +w ./JUCE -R
       chmod +w ./readerwriterqueue -R
     '';
