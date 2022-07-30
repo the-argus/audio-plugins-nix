@@ -63,8 +63,6 @@ pkgs.stdenv.mkDerivation
       catch2-src = pkgs.fetchgit {
         url = "https://github.com/catchorg/Catch2.git";
         rev = "997a7d4165b3939347f1a95f9311a3e3c066ee0b";
-        date = "2022-07-25T21:07:49+02:00";
-        path = "/nix/store/0w1xangwk0skw78cpnil6a6yrkc1ba7b-Catch2";
         sha256 = "0jslynkl6c1q3lpzv2wirdncwdz0qm80w4wdhw1bh49azbhz6zc8";
         fetchLFS = false;
         fetchSubmodules = false;
