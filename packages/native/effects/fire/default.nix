@@ -12,6 +12,7 @@ pkgs.stdenv.mkDerivation
     rev = "971ea15e6caebe5881184239a299b51a10ecaccf";
     sha256 = "0wjps2b9g9482n8xqm7kcj19n30h6xfv4wwsp8srpazpn5ylqjl6";
     fetchSubmodules = true; # get JUCE
+    deepClone = true;
   };
 
   nativeBuildInputs = with pkgs; [
