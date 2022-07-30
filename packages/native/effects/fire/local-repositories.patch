@@ -26,6 +26,7 @@ index d641ad0..9724b89 100644
 -FetchContent_MakeAvailable(readerwriterqueue)
 +add_subdirectory(JUCE)
 +add_subdirectory(readerwriterqueue)
++add_subdirectory(catch2)
 +
 +# include(FetchContent)
 +# FetchContent_Declare(
