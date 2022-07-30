@@ -40,15 +40,15 @@ pkgs.stdenv.mkDerivation
 
   postPatch =
     let
-      # juce-src = pkgs.fetchgit {
-      #   url = "https://github.com/juce-framework/JUCE.git";
-      #   rev = "4c43bf429e90690cb1f05b7c8a044cc9f5a59e7d";
-      #   sha256 = "07ncsgis18gnbpcya85ikgykldnaj5xmyfcrdjm2rzzg30f9n07h";
-      #   fetchLFS = false;
-      #   fetchSubmodules = false;
-      #   deepClone = false;
-      #   leaveDotGit = false;
-      # };
+      juce-src = pkgs.fetchgit {
+        url = "https://github.com/juce-framework/JUCE.git";
+        rev = "4c43bf429e90690cb1f05b7c8a044cc9f5a59e7d";
+        sha256 = "07ncsgis18gnbpcya85ikgykldnaj5xmyfcrdjm2rzzg30f9n07h";
+        fetchLFS = false;
+        fetchSubmodules = false;
+        deepClone = false;
+        leaveDotGit = false;
+      };
 
       rwq-src = pkgs.fetchgit {
         url = "https://github.com/cameron314/readerwriterqueue";
@@ -60,10 +60,15 @@ pkgs.stdenv.mkDerivation
         leaveDotGit = false;
       };
     in
-      # cp -r ${juce-src} ./JUCE
     ''
+      echo "Current directory:"
+      ls
+      echo "./JUCE:"
       ls JUCE
+      echo "WD:"
       pwd
+      rmdir JUCE
+      cp -r ${juce-src} ./JUCE
       cp -r ${rwq-src} ./readerwriterqueue
       chmod +w ./JUCE -R
       chmod +w ./readerwriterqueue -R
