@@ -83,6 +83,7 @@ pkgs.stdenv.mkDerivation
   buildPhase =
     '' 
       cmake -S .. -B .
+      make
     '';
 
   installPhase = ''
