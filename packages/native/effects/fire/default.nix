@@ -71,12 +71,6 @@ pkgs.stdenv.mkDerivation
       };
     in
     ''
-      echo "Current directory:"
-      ls
-      echo "./JUCE:"
-      ls JUCE
-      echo "WD:"
-      pwd
       rmdir JUCE
       cp -r ${juce-src} ./JUCE
       cp -r ${rwq-src} ./readerwriterqueue
@@ -84,18 +78,15 @@ pkgs.stdenv.mkDerivation
       chmod +w ./JUCE -R
       chmod +w ./readerwriterqueue -R
       chmod +w ./Catch2 -R
-      ls ./Catch2
-      echo ${catch2-src}
     '';
 
   buildPhase =
     '' 
-      cmake -S . -B ./build
+      cmake -S .. -B .
     '';
 
   installPhase = ''
     mkdir $out
-    cd ./build
     cp -r . $out
   '';
 }
