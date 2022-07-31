@@ -1,9 +1,9 @@
 ---
- CMakeLists.txt | 45 ++++++++++++++++++++++++---------------------
- 1 file changed, 24 insertions(+), 21 deletions(-)
+ CMakeLists.txt | 47 +++++++++++++++++++++++++----------------------
+ 1 file changed, 25 insertions(+), 22 deletions(-)
 
 diff --git a/CMakeLists.txt b/CMakeLists.txt
-index d641ad0..a0a7b72 100644
+index d641ad0..1319a68 100644
 --- a/CMakeLists.txt
 +++ b/CMakeLists.txt
 @@ -29,21 +29,23 @@ project(Fire VERSION 1.0.0)
@@ -63,12 +63,14 @@ index d641ad0..a0a7b72 100644
  
  # Setup the test executable, again C++ 20 please
  add_executable(Tests ${TestFiles})
-@@ -199,4 +202,4 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/test PREFIX "" FILES ${TestFiles})
+@@ -198,5 +201,5 @@ source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}/test PREFIX "" FILES ${TestFiles})
+ # https://github.com/catchorg/Catch2/blob/devel/docs/cmake-integration.md#parseandaddcatchtestscmake
  # We have to manually provide the source directory here for now
  # https://github.com/catchorg/Catch2/issues/2026
- include(${Catch2_SOURCE_DIR}/contrib/Catch.cmake)
+-include(${Catch2_SOURCE_DIR}/contrib/Catch.cmake)
 -catch_discover_tests(Tests)
 \ No newline at end of file
++include(${Catch2_SOURCE_DIR}/extras/Catch.cmake)
 +catch_discover_tests(Tests)
 -- 
 2.36.0
