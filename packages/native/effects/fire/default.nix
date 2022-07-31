@@ -85,6 +85,7 @@ pkgs.stdenv.mkDerivation
       chmod +w ./readerwriterqueue -R
       chmod +w ./Catch2 -R
       ls ./Catch2
+      echo ${catch2-src}
     '';
 
   buildPhase =
