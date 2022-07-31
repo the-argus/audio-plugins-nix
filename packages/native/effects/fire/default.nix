@@ -80,8 +80,6 @@ pkgs.stdenv.mkDerivation
       chmod +w ./Catch2 -R
     '';
   
-  cmakeFlags = [ "--config Release" ];
-
   installPhase = ''
     mkdir $out
     cp -r . $out
