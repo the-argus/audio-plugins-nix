@@ -80,11 +80,11 @@ pkgs.stdenv.mkDerivation
       chmod +w ./Catch2 -R
     '';
 
-  buildPhase =
-    '' 
-      cmake -S .. -B .
-      make
-    '';
+  # buildPhase =
+  #   '' 
+  #     cmake -S .. -B .
+  #     make
+  #   '';
 
   installPhase = ''
     mkdir $out
