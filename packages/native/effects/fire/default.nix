@@ -79,12 +79,8 @@ pkgs.stdenv.mkDerivation
       chmod +w ./readerwriterqueue -R
       chmod +w ./Catch2 -R
     '';
-
-  # buildPhase =
-  #   '' 
-  #     cmake -S .. -B .
-  #     make
-  #   '';
+  
+  cmakeFlags = [ "--config Release" ];
 
   installPhase = ''
     mkdir $out
