@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   pname = "Fire";
-  version = "1.0.0";
+  version = "0.9.9";
 in
 pkgs.stdenv.mkDerivation
 {
@@ -9,10 +9,10 @@ pkgs.stdenv.mkDerivation
 
   src = pkgs.fetchgit {
     url = "https://github.com/jerryuhoo/Fire";
-    rev = "971ea15e6caebe5881184239a299b51a10ecaccf";
-    sha256 = "0wjps2b9g9482n8xqm7kcj19n30h6xfv4wwsp8srpazpn5ylqjl6";
-    fetchSubmodules = true; # get JUCE
-    deepClone = true;
+    rev = "7bd2f52ffa8c85e3e2c38e15f4d434089f7d616a";
+    sha256 = "1ygsmmd0m20ak3qmjmw4mssljkippkjcw73m8g9a9d4dygjqsw4w";
+    fetchSubmodules = false;
+    deepClone = false;
   };
 
   nativeBuildInputs = with pkgs; [
