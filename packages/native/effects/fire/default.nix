@@ -84,6 +84,7 @@ pkgs.stdenv.mkDerivation
       chmod +w ./JUCE -R
       chmod +w ./readerwriterqueue -R
       chmod +w ./Catch2 -R
+      ls ./Catch2
     '';
 
   buildPhase =
