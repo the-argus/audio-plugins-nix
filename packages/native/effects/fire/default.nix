@@ -80,10 +80,10 @@ pkgs.stdenv.mkDerivation
       rmdir JUCE
       cp -r ${juce-src} ./JUCE
       cp -r ${rwq-src} ./readerwriterqueue
-      cp -r ${catch2-src} ./catch2
+      cp -r ${catch2-src} ./Catch2
       chmod +w ./JUCE -R
       chmod +w ./readerwriterqueue -R
-      chmod +w ./catch2 -R
+      chmod +w ./Catch2 -R
     '';
 
   buildPhase =
