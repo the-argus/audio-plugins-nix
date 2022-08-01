@@ -1,5 +1,5 @@
 { pkgs, ... }:
-pkgs.lib.trivial.warn ''WARNING: TAL U-NO-62 is deprecated software and recieves no updates or support.''
+pkgs.lib.trivial.warn ''TAL U-NO-62 is deprecated software and recieves no updates or support.''
 pkgs.stdenv.mkDerivation {
   name = "TAL-U-NO-62";
   src = pkgs.fetchurl {

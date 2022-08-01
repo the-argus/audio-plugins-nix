@@ -1,8 +1,6 @@
 { pkgs, ... }:
-pkgs.lib.trivial.warn ''
-TAL Dub X is a paid product. You will only get the demo functionality.
-Using the full version of TAL Dub X installed via this flake is untested.
-''
+pkgs.lib.trivial.warn ''TAL Dub X is a paid product. You will only get the demo functionality.
+Using the full version of TAL Dub X installed via this flake is untested.''
 pkgs.stdenv.mkDerivation {
   name = "TAL-Dub-X";
   src = pkgs.fetchurl {

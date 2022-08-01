@@ -1,8 +1,6 @@
 { pkgs, ... }:
-pkgs.lib.trivial.warn ''
-TAL Bassline 101 is a paid product. You will only get the demo functionality.
-Using the full version of TAL Bassline 101 installed via this flake is untested.
-''
+pkgs.lib.trivial.warn ''TAL Bassline 101 is a paid product. You will only get the demo functionality.
+Using the full version of TAL Bassline 101 installed via this flake is untested.''
 pkgs.stdenv.mkDerivation {
   name = "TAL-Bassline-101";
   src = pkgs.fetchurl {

@@ -1,5 +1,5 @@
 { pkgs, ... }:
-pkgs.lib.trivial.warn ''WARNING: TAL Bassline is deprecated software and recieves no updates or support.''
+pkgs.lib.trivial.warn ''TAL Bassline is deprecated software and recieves no updates or support.''
 pkgs.stdenv.mkDerivation {
   name = "TAL-bassline";
   src = pkgs.fetchurl {

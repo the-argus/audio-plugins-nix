@@ -1,5 +1,5 @@
 { pkgs, ... }:
-pkgs.lib.trivial.warn ''WARNING: TAL Tube is deprecated, 32bit software and recieves no updates or support.''
+pkgs.lib.trivial.warn ''TAL Tube is deprecated, 32bit software and recieves no updates or support.''
 pkgs.stdenv.mkDerivation {
   name = "TAL-Tube";
   src = pkgs.fetchurl {

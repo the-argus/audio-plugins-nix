@@ -1,5 +1,5 @@
 { pkgs, ... }:
-pkgs.lib.trivial.warn ''WARNING: TAL Flanger is deprecated software and recieves no updates or support.''
+pkgs.lib.trivial.warn ''TAL Flanger is deprecated software and recieves no updates or support.''
 pkgs.stdenv.mkDerivation {
   name = "TAL-flanger";
   src = pkgs.fetchurl {

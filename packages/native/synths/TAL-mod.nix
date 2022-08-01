@@ -1,8 +1,6 @@
 { pkgs, ... }:
-pkgs.lib.trivial.warn ''
-TAL Mod is a paid product. You will only get the demo functionality.
-Using the full version of TAL Mod installed via this flake is untested.
-''
+pkgs.lib.trivial.warn ''TAL Mod is a paid product. You will only get the demo functionality.
+Using the full version of TAL Mod installed via this flake is untested.''
 pkgs.stdenv.mkDerivation {
   name = "TAL-Mod";
   src = pkgs.fetchurl {

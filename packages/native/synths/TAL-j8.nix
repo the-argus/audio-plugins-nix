@@ -1,8 +1,6 @@
 { pkgs, ... }:
-pkgs.lib.trivial.warn ''
-TAL J8 is a paid product. You will only get the demo functionality.
-Using the full version of TAL J8 installed via this flake is untested.
-''
+pkgs.lib.trivial.warn ''TAL J8 is a paid product. You will only get the demo functionality.
+Using the full version of TAL J8 installed via this flake is untested.''
 pkgs.stdenv.mkDerivation {
   name = "TAL-J8";
   src = pkgs.fetchurl {
