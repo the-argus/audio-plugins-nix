@@ -8,7 +8,6 @@ A nix flake providing a home-manager module for VST emulation with yabridge, and
   # add as an input
   inputs.audio-plugins = {
     url = "github:the-argus/audio-plugins-nix";
-    inputs.nixpkgs.follows = "nixpkgs";
   };
   
   # add audio-plugins to flake inputs like so

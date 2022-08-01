@@ -15,7 +15,7 @@
       pkgs = import nixpkgs { inherit system; };
     in
     {
-        homeManagerModule = import ./module.nix;
-        mpkgs = import ./packages { inherit pkgs; };
+      homeManagerModule = import ./module.nix;
+      mpkgs = import ./packages { inherit pkgs; };
     };
 }
