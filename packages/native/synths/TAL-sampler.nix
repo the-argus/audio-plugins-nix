@@ -1,6 +1,6 @@
 { pkgs, ... }:
 pkgs.lib.trivial.warn ''TAL Sampler is a paid product. You will only get the demo functionality.
-Using the full version of TAL Bassline 101 installed via this flake is untested.''
+Using the full version of TAL Sampler installed via this flake is untested.''
 pkgs.stdenv.mkDerivation {
   name = "TAL-Sampler";
   src = pkgs.fetchurl {
