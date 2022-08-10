@@ -13,7 +13,7 @@ pkgs.stdenv.mkDerivation rec {
   configurePhase = ''
     mkdir build
     cd build
-    cmake $src -DJUCE_COPY_PLUGIN_AFTER_BUILD=TRUE
+    cmake $src
   '';
   buildPhase = ''
     cmake --build .
