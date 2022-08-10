@@ -28,10 +28,13 @@ Home manager configuration:
   programs.yabridge = {
     enable = true;
     plugins = with mpkgs; [
-        synths.ct0w0
+      effects.ferric-tds
+      synths.ct0w0
     ];
+
     nativePlugins = with mpkgs.native; [
-        synths.dexed
+      effects.fire-bin
+      synths.dexed
     ];
     extraPath = "/home/user/.wine/drive_c/yabridge";
   };
