@@ -12,15 +12,18 @@ pkgs.stdenv.mkDerivation rec {
 
   configurePhase = ''
     mkdir build
-    cd build
+    pushd build
     cmake $src
+    popd
   '';
   buildPhase = ''
+    pushd build
     cmake --build .
+    popd
   '';
 
   installPhase = ''
-    cp $src/build/Source/Dexed_artefacts/VST3/Dexed.vst3/Contents/x86_64-linux/Dexed.so $out
+    cp ./build/Source/Dexed_artefacts/VST3/Dexed.vst3/Contents/x86_64-linux/Dexed.so $out
   '';
 
   nativeBuildInputs = with pkgs; [
