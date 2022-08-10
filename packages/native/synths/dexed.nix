@@ -5,7 +5,7 @@ pkgs.stdenv.mkDerivation rec {
     src = pkgs.fetchgit {
         url = "https://github.com/asb2m10/dexed";
         rev = "2c036316bcd512818aa9cc8129767ad9e0ec7132";
-        sha256 = "0px7qr91mzinz2979zkpbv17ds82hc1bkzn3jzx3xpkvxdpfnw8c";
+        sha256 = "sha256-ZLKPZPAjnqtZC8QD2FUxNLEMi2dYHLwVamERPU18Q/s=";
         fetchSubmodules = true;
         deepClone = true;
     };
