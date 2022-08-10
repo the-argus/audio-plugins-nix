@@ -7,28 +7,36 @@ in
   options.programs.yabridge = {
     enable = mkEnableOption "Yabridge VST Emulation";
 
-    paths = mkOption {
-      type = types.listOf types.str;
+    plugins = mkOption {
+      type = types.listOf [ types.package types.str ];
       default = [ ];
-      description = "Paths to folders which contain .vst and .vst3 plugins.";
+      description = "Paths to folders (or packages) which contain .vst and .vst3 plugins.";
     };
 
-    nativePaths = mkOption {
-      type = types.listOf types.str;
+    nativePlugins = mkOption {
+      type = types.listOf [ types.package types.str ];
       default = [ ];
       description = "Paths to folders which contain plugins which will run natively on linux. They will be placed in the same folder as emulated VSTs.";
     };
 
+    supressUnmaintainedWarning = mkEnableOption "Stop the red warning/trace \
+      messages when evaluating unmaintained packages.";
+    supressFreemiumWarning = mkEnableOption "Stop the red warning/trace \
+      messages when evaluating packages which require a paid account to \
+      unlock full features.";
+
     extraPath = mkOption {
       type = types.str;
       default = "";
-      description = "An out-of-store path to append to yabridge configuration. Must be added to your DAW's VST search path.";
+      description = "An out-of-store path to append to yabridge configuration.\
+        Must be added to your DAW's VST search path.";
     };
 
     vstDirectory = mkOption {
-        type = types.str;
-        default = ".vst";
-        description = "Path relative to your home directory where vst plugins will be installed.";
+      type = types.str;
+      default = ".vst";
+      description = "Path relative to your home directory where vst plugins \
+        will be installed.";
     };
 
     package = mkOption {
@@ -47,10 +55,12 @@ in
     let
       yabridge = cfg.package;
       yabridgectl = cfg.ctlPackage;
-      toCpCommand = path: "cp -r ${path} $out";
-      toYabridgeCommand = path: "${cfg.ctlPackage}/bin/yabridgectl add $out/${(builtins.baseNameOf path)}";
-      cpCommands = map toCpCommand cfg.paths;
-      yabridgeCommands = map toYabridgeCommand cfg.paths;
+      toCpCommand = package: "cp -r ${package} $out";
+      toYabridgeCommand = path:
+        "${cfg.ctlPackage}/bin/yabridgectl add $out/${
+        (builtins.baseNameOf (toString path))}";
+      cpCommands = map toCpCommand cfg.plugins;
+      yabridgeCommands = map toYabridgeCommand cfg.plugins;
 
       # edit yabridge config to explicitly include extraPath
       escapedExtraPath = lib.strings.escape [ "/" ] cfg.extraPath;
@@ -74,18 +84,26 @@ in
 
           ${patch}
         '';
-      
-      # create a script which will copy all the native plugins into its working directory
+
+      # create a script which will copy all the native plugins into its working
+      # directory
       copyCommands = ''
         mkdir $out
-        ${builtins.concatStringsSep "\n" (map toCpCommand cfg.nativePaths)}
+        ${
+        builtins.concatStringsSep "\n" 
+          (map toCpCommand cfg.nativePlugins)
+        }
       '';
 
-      nativePlugins = pkgs.runCommandLocal "native-plugins-combined" { } copyCommands;
-      
-      # tracer = builtins.trace scriptContents scriptContents;
-      # userYabridge = pkgs.runCommandLocal "yabridge-configuration" { } tracer;
-      userYabridge = pkgs.runCommandLocal "yabridge-configuration" { } scriptContents;
+      nativePlugins = pkgs.runCommandLocal
+        "native-plugins-combined"
+        { }
+        copyCommands;
+
+      userYabridge = pkgs.runCommandLocal
+        "yabridge-configuration"
+        { }
+        scriptContents;
     in
     mkIf cfg.enable {
       home.packages = [ userYabridge yabridge yabridgectl ];

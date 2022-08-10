@@ -55,6 +55,10 @@ let
   # jerryuhoo
   fire-bin = import ./native/effects/fire-bin.nix { inherit pkgs; };
   fire = import ./native/effects/fire { inherit pkgs; };
+  
+  # asb2m10
+  dexed = import ./native/synths/dexed.nix { inherit pkgs; };
+  dexed-bin = import ./native/synths/dexed-bin.nix { inherit pkgs; };
 in
 {
   synths = {
@@ -78,7 +82,7 @@ in
 
   native = {
     synths = {
-      dexed = import ./native/synths/dexed.nix { inherit pkgs; };
+      inherit dexed dexed-bin;
       # TAL
       inherit tal-noisemaker tal-bassline-101 tal-drum tal-j8 tal-sampler
       tal-unolx tal-mod tal-dac tal-dub-x;
@@ -97,7 +101,7 @@ in
     native = {
       TAL = [ tal-reverb-4 tal-filter-2 tal-vocoder tal-chorus tal-noisemaker
       tal-dac tal-dub-x tal-mod tal-unolx tal-sampler tal-j8 tal-drum
-      tal-bassline-101 ];
+      tal-bassline-101 dexed dexed-bin ];
     };
 
     TAL = [ tal-dub tal-dub-2 tal-dub-3 tal-bitcrusher tal-tube tal-use
