@@ -9,6 +9,8 @@ pkgs.stdenv.mkDerivation rec {
         fetchSubmodules = true;
         deepClone = true;
     };
+  
+  enableParallelBuilding = true;
 
   configurePhase = ''
     mkdir build
@@ -18,7 +20,7 @@ pkgs.stdenv.mkDerivation rec {
   '';
   buildPhase = ''
     pushd build
-    cmake --build .
+    cmake --build . ${if enableParallelBuilding then "-j$NIX_BUILD_CORES" else ""}
     popd
   '';
 
