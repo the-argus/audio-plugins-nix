@@ -1,12 +1,36 @@
 { pkgs, ... }:
-pkgs.stdenv.mkDerivation {
-  name = "dexed-synth";
-  src = pkgs.fetchurl {
-    url = "https://github.com/asb2m10/dexed/releases/download/v0.9.6/dexed-0.9.6-lnx.zip";
-    sha256 = "0cwqpm8n8jwcrd09nsbl2cz2rz3hwr29dsir2bwlibxsjxl5zk6b";
-  };
+pkgs.stdenv.mkDerivation rec {
+    pname = "dexed-synth";
+    version = "0.9.6";
+    src = pkgs.fetchgit {
+        url = "https://github.com/asb2m10/dexed";
+        rev = "2c036316bcd512818aa9cc8129767ad9e0ec7132";
+        sha256 = "0px7qr91mzinz2979zkpbv17ds82hc1bkzn3jzx3xpkvxdpfnw8c";
+        fetchSubmodules = true;
+        deepClone = true;
+        leaveDotGit = false;
+    };
 
-  nativeBuildInputs = [ pkgs.unzip ];
+  cmakeFlags = [ "-DJUCE_COPY_PLUGIN_AFTER_BUILD=TRUE" ];
 
-  installPhase = "cp -r . $out";
+  nativeBuildInputs = with pkgs; [
+    cmake
+    pkgconfig
+
+    # juceaide
+    xorg.libX11
+    xorg.libXrandr
+    xorg.libXinerama
+    xorg.libXext
+    xorg.libXcursor
+    freetype
+    # extra modules
+    alsaLib
+    gtk3-x11
+    webkitgtk
+
+    # final build deps
+    libjack2
+  ];
+
 }
