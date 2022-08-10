@@ -25,7 +25,8 @@ pkgs.stdenv.mkDerivation rec {
   '';
 
   installPhase = ''
-    cp ./build/Source/Dexed_artefacts/VST3/Dexed.vst3/Contents/x86_64-linux/Dexed.so $out
+    mkdir $out
+    cp ./build/Source/Dexed_artefacts/VST3/Dexed.vst3/Contents/x86_64-linux/Dexed.so $out/
   '';
 
   nativeBuildInputs = with pkgs; [
