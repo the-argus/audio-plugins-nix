@@ -10,7 +10,18 @@ pkgs.stdenv.mkDerivation rec {
         deepClone = true;
     };
 
-  cmakeFlags = [ "-DJUCE_COPY_PLUGIN_AFTER_BUILD=TRUE" ];
+  configurePhase = ''
+    mkdir build
+    cd build
+    cmake $src -DJUCE_COPY_PLUGIN_AFTER_BUILD=TRUE
+  '';
+  buildPhase = ''
+    cmake --build .
+  '';
+
+  installPhase = ''
+    cp $src/build/Source/Dexed_artefacts/VST3/Dexed.vst3/Contents/x86_64-linux/Dexed.so $out
+  '';
 
   nativeBuildInputs = with pkgs; [
     cmake
@@ -31,5 +42,4 @@ pkgs.stdenv.mkDerivation rec {
     # final build deps
     libjack2
   ];
-
 }
