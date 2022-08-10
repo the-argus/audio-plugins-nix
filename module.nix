@@ -53,12 +53,16 @@ in
 
   config =
     let
-      yabridge = cfg.package;
-      yabridgectl = cfg.ctlPackage;
+      # binary to use
+      yabridgectl = "${cfg.ctlPackage}/bin/yabridgectl";
+      
+      # functions to create commands for a package
       toCpCommand = package: "cp -r ${package} $out";
-      toYabridgeCommand = path:
-        "${cfg.ctlPackage}/bin/yabridgectl add $out/${
-        (builtins.baseNameOf (toString path))}";
+      toYabridgeCommand = package:
+        "${yabridgectl} add $out/${
+        (builtins.baseNameOf (toString package))}";
+      
+      # list of strings (commands) created from packages
       cpCommands = map toCpCommand cfg.plugins;
       yabridgeCommands = map toYabridgeCommand cfg.plugins;
 
@@ -68,26 +72,39 @@ in
         if cfg.extraPath != "" then
           ''sed -i "3s/\]$/,'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml''
         else "";
-
+      
+      # create script to setup directory and execute the copy commands and then
+      # sync with the yabridge commands.
       scriptContents =
         ''
           mkdir $out
+
+          # set all variables to have yabridge work in nix store
           export WINEPREFIX=$out/wine
           export XDG_CONFIG_HOME=$out/config
           export HOME=$out/home
-          ${cfg.ctlPackage}/bin/yabridgectl set --path=${cfg.package}/lib
+          ${yabridgectl} set --path=${cfg.package}/lib
+
           # copy all vst plugin folders to out directory
           ${builtins.concatStringsSep "\n" cpCommands}
-          ${builtins.concatStringsSep "\n" yabridgeCommands}
-          # add this folder and sync it
-          ${cfg.ctlPackage}/bin/yabridgectl sync
 
+          # add all the copied plugin folders to yabridge
+          ${builtins.concatStringsSep "\n" yabridgeCommands}
+
+          ${yabridgectl} sync
+          
+          # adds extraPath
           ${patch}
         '';
+      
+      userYabridge = pkgs.runCommandLocal
+        "yabridge-configuration"
+        { }
+        scriptContents;
 
-      # create a script which will copy all the native plugins into its working
-      # directory
-      copyCommands = ''
+      # create a derivation which will copy all the native plugins into its
+      # working directory
+      nativePluginCpCommands = ''
         mkdir $out
         ${
         builtins.concatStringsSep "\n" 
@@ -98,15 +115,10 @@ in
       nativePlugins = pkgs.runCommandLocal
         "native-plugins-combined"
         { }
-        copyCommands;
-
-      userYabridge = pkgs.runCommandLocal
-        "yabridge-configuration"
-        { }
-        scriptContents;
+        nativePluginCpCommands;
     in
     mkIf cfg.enable {
-      home.packages = [ userYabridge yabridge yabridgectl ];
+      home.packages = [ userYabridge cfg.package cfg.ctlPackage ];
       home.file = {
         "${cfg.vstDirectory}/yabridge" = {
           source = "${userYabridge}/home/.vst3/yabridge";
