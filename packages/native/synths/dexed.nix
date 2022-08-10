@@ -8,7 +8,6 @@ pkgs.stdenv.mkDerivation rec {
         sha256 = "0px7qr91mzinz2979zkpbv17ds82hc1bkzn3jzx3xpkvxdpfnw8c";
         fetchSubmodules = true;
         deepClone = true;
-        leaveDotGit = false;
     };
 
   cmakeFlags = [ "-DJUCE_COPY_PLUGIN_AFTER_BUILD=TRUE" ];
