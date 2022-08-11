@@ -8,13 +8,13 @@ in
     enable = mkEnableOption "Yabridge VST Emulation";
 
     plugins = mkOption {
-      type = types.listOf (types.oneOf [ types.package types.str ]);
+      type = types.listOf types.package;
       default = [ ];
       description = "Paths to folders (or packages) which contain .vst and .vst3 plugins.";
     };
 
     nativePlugins = mkOption {
-      type = types.listOf (types.oneOf [ types.package types.str ]);
+      type = types.listOf types.package;
       default = [ ];
       description = "Paths to folders which contain plugins which will run natively on linux. They will be placed in the same folder as emulated VSTs.";
     };
