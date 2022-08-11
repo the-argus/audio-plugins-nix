@@ -5,7 +5,7 @@ pkgs.stdenv.mkDerivation {
   name = "TAL-u-no-lx";
   src = pkgs.fetchurl {
     url = "https://tal-software.com/downloads/plugins/TAL-U-NO-LX-V2_64_linux.zip";
-    sha256 = "0ppa22z6glaqhvq4zn798f1l73hx2d464jcgm3crk9jfm7afzmj0";
+    sha256 = "sha256-FR8d9lGxrf2fmvOSEVsI8t+IzFpWZmbhWP1cTlC5r8U=";
   };
 
   nativeBuildInputs = [ pkgs.unzip ];
