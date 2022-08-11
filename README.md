@@ -37,7 +37,6 @@ Minimal home manager configuration example:
       effects.fire-bin
       synths.dexed
     ];
-    extraPath = "/home/user/.wine/drive_c/yabridge";
   };
 }
 ```
