@@ -55,7 +55,7 @@ let
   # jerryuhoo
   fire-bin = import ./native/effects/fire-bin.nix { inherit pkgs; };
   fire = import ./native/effects/fire { inherit pkgs; };
-  
+
   # asb2m10
   dexed = import ./native/synths/dexed.nix { inherit pkgs; };
   dexed-bin = import ./native/synths/dexed-bin.nix { inherit pkgs; };
@@ -64,7 +64,7 @@ in
   synths = {
     # HECKSCAPER
     inherit ct0w0 ctws1 ambi-vac damascus great-wall ill-logic ktso nuxx ouch
-    psykic real-animal sota virtua-dub;
+      psykic real-animal sota virtua-dub;
     #TAL
     inherit tal-elek7ro-2 tal-bassline tal-uno62;
   };
@@ -85,7 +85,7 @@ in
       inherit dexed dexed-bin;
       # TAL
       inherit tal-noisemaker tal-bassline-101 tal-drum tal-j8 tal-sampler
-      tal-unolx tal-mod tal-dac tal-dub-x;
+        tal-unolx tal-mod tal-dac tal-dub-x;
     };
     effects = {
       # TAL
@@ -99,16 +99,56 @@ in
   # sets meant to be concatenated with your programs.yabridge.paths
   sets = {
     native = {
-      TAL = [ tal-reverb-4 tal-filter-2 tal-vocoder tal-chorus tal-noisemaker
-      tal-dac tal-dub-x tal-mod tal-unolx tal-sampler tal-j8 tal-drum
-      tal-bassline-101 ];
+      TAL = [
+        tal-reverb-4
+        tal-filter-2
+        tal-vocoder
+        tal-chorus
+        tal-noisemaker
+        tal-dac
+        tal-dub-x
+        tal-mod
+        tal-unolx
+        tal-sampler
+        tal-j8
+        tal-drum
+        tal-bassline-101
+      ];
     };
 
-    TAL = [ tal-dub tal-dub-2 tal-dub-3 tal-bitcrusher tal-tube tal-use
-    tal-uno62 tal-elek7ro-2 tal-bassline ];
+    TAL = [
+      tal-dub
+      tal-dub-2
+      tal-dub-3
+      tal-bitcrusher
+      tal-tube
+      tal-use
+      tal-uno62
+      tal-elek7ro-2
+      tal-bassline
+    ];
     # all heckscaper plugins
-    heckscaper = [ ct0w0 ctws1 ambi-vac damascus great-wall ill-logic ktso
-    nuxx ouch psykic real-animal sota virtua-dub ambifx fuzz-buddies meat-zone
-    deletr ];
+    heckscaper = [
+      ct0w0
+      ctws1
+      ambi-vac
+      damascus
+      great-wall
+      ill-logic
+      ktso
+      nuxx
+      ouch
+      psykic
+      real-animal
+      sota
+      virtua-dub
+      ambifx
+      fuzz-buddies
+      meat-zone
+      deletr
+    ];
   };
+
+
+  lib = import ../lib { inherit pkgs; };
 }

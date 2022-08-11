@@ -17,6 +17,5 @@
     {
       homeManagerModule = import ./module.nix;
       mpkgs = import ./packages { inherit pkgs; };
-      lib = import ./lib { inherit pkgs; };
     };
 }
