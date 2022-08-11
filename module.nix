@@ -8,13 +8,13 @@ in
     enable = mkEnableOption "Yabridge VST Emulation";
 
     plugins = mkOption {
-      type = types.listOf [ types.package types.str ];
+      type = types.listOf (types.oneOf [ types.package types.str ]);
       default = [ ];
       description = "Paths to folders (or packages) which contain .vst and .vst3 plugins.";
     };
 
     nativePlugins = mkOption {
-      type = types.listOf [ types.package types.str ];
+      type = types.listOf (types.oneOf [ types.package types.str ]);
       default = [ ];
       description = "Paths to folders which contain plugins which will run natively on linux. They will be placed in the same folder as emulated VSTs.";
     };
@@ -55,13 +55,13 @@ in
     let
       # binary to use
       yabridgectl = "${cfg.ctlPackage}/bin/yabridgectl";
-      
+
       # functions to create commands for a package
       toCpCommand = package: "cp -r ${package} $out";
       toYabridgeCommand = package:
         "${yabridgectl} add $out/${
         (builtins.baseNameOf (toString package))}";
-      
+
       # list of strings (commands) created from packages
       cpCommands = map toCpCommand cfg.plugins;
       yabridgeCommands = map toYabridgeCommand cfg.plugins;
@@ -72,7 +72,7 @@ in
         if cfg.extraPath != "" then
           ''sed -i "3s/\]$/,'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml''
         else "";
-      
+
       # create script to setup directory and execute the copy commands and then
       # sync with the yabridge commands.
       scriptContents =
@@ -96,8 +96,11 @@ in
           # adds extraPath
           ${patch}
         '';
-      
-      userYabridge = pkgs.runCommandLocal "yabridge-configuration" { } scriptContents;
+
+      userYabridge = pkgs.runCommandLocal
+        "yabridge-configuration"
+        { }
+        scriptContents;
 
       # create a derivation which will copy all the native plugins into its
       # working directory
