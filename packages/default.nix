@@ -101,7 +101,7 @@ in
     native = {
       TAL = [ tal-reverb-4 tal-filter-2 tal-vocoder tal-chorus tal-noisemaker
       tal-dac tal-dub-x tal-mod tal-unolx tal-sampler tal-j8 tal-drum
-      tal-bassline-101 dexed dexed-bin ];
+      tal-bassline-101 ];
     };
 
     TAL = [ tal-dub tal-dub-2 tal-dub-3 tal-bitcrusher tal-tube tal-use
