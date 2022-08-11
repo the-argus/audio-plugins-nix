@@ -5,7 +5,7 @@ pkgs.stdenv.mkDerivation {
   name = "TAL-Bassline-101";
   src = pkgs.fetchurl {
     url = "https://tal-software.com/downloads/plugins/TAL-BassLine-101_64_linux.zip";
-    sha256 = "0h7lzj0wpri0scwx1b8l3020rmnafhrdv79h1rsw05ykzyrj8x33";
+    sha256 = "sha256-x2d+UFc2NoQvvP+RCFdGQBtge3sR2PB+NgtQS80AYFw=";
   };
 
   nativeBuildInputs = [ pkgs.unzip ];
