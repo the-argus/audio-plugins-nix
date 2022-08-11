@@ -97,10 +97,7 @@ in
           ${patch}
         '';
       
-      userYabridge = pkgs.runCommandLocal
-        "yabridge-configuration"
-        { }
-        scriptContents;
+      userYabridge = pkgs.runCommandLocal "yabridge-configuration" { } scriptContents;
 
       # create a derivation which will copy all the native plugins into its
       # working directory
