@@ -71,7 +71,12 @@ in
       escapedExtraPath = lib.strings.escape [ "/" ] cfg.extraPath;
       patch =
         if cfg.extraPath != "" then
-          ''sed -i "3s/\]$/,'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml''
+          ''
+          # try to replace line three (if there are very few plugins, ] is on same line)
+          sed -i "3s/\]$/,'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml
+          # replace line containing only "]" with a new entry for extraPath
+          sed -i "s/^\]$/'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml
+          ''
         else "";
 
       # create script to setup directory and execute the copy commands and then
