@@ -73,7 +73,9 @@ in
         if cfg.extraPath != "" then
           ''
           # try to replace line three (if there are very few plugins, ] is on same line)
+          # different versions use line 2 and 3 i think
           sed -i "3s/\]$/,'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml
+          sed -i "2s/\]$/,'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml
           # replace line containing only "]" with a new entry for extraPath
           sed -i "s/^\]$/'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml
           ''
