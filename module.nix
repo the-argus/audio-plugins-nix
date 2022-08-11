@@ -58,6 +58,7 @@ in
 
       # functions to create commands for a package
       toCpCommand = package: "cp -r ${package} $out";
+      toLnCommand = package: "ln -sf ${package} $out";
       toYabridgeCommand = package:
         "${yabridgectl} add $out/${
         (builtins.baseNameOf (toString package))}";
@@ -104,18 +105,18 @@ in
 
       # create a derivation which will copy all the native plugins into its
       # working directory
-      nativePluginCpCommands = ''
+      nativePluginLnCommands = ''
         mkdir $out
         ${
         builtins.concatStringsSep "\n" 
-          (map toCpCommand cfg.nativePlugins)
+          (map toLnCommand cfg.nativePlugins)
         }
       '';
 
       nativePlugins = pkgs.runCommandLocal
         "native-plugins-combined"
         { }
-        nativePluginCpCommands;
+        nativePluginLnCommands;
     in
     mkIf cfg.enable {
       home.packages = [ userYabridge cfg.package cfg.ctlPackage ];
