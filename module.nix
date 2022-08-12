@@ -10,13 +10,22 @@ in
     plugins = mkOption {
       type = types.listOf types.package;
       default = [ ];
-      description = "Paths to folders (or packages) which contain .vst and .vst3 plugins.";
+      description = "Paths to folders (or packages) which contain .vst and \
+        .vst3 plugins.";
     };
 
     nativePlugins = mkOption {
       type = types.listOf types.package;
       default = [ ];
-      description = "Paths to folders which contain plugins which will run natively on linux. They will be placed in the same folder as emulated VSTs.";
+      description = "Paths to folders which contain plugins which will run \
+        natively on linux. They will be placed in the same folder as emulated \
+        VSTs.";
+    };
+
+    lv2 = mkOption {
+      type = types.listOf types.package;
+      default = [ ];
+      description = "Packages containing lv2 plugins.";
     };
 
     suppressUnmaintainedWarning = mkEnableOption "Stop the red warning/trace \
@@ -36,6 +45,13 @@ in
       type = types.str;
       default = ".vst";
       description = "Path relative to your home directory where vst plugins \
+        will be installed.";
+    };
+
+    lv2Directory = mkOption {
+      type = types.str;
+      default = ".lv2";
+      description = "Path relative to your home directory where lv2 plugins \
         will be installed.";
     };
 
@@ -71,13 +87,13 @@ in
 
       warnDeprecated = package: (warnGeneral package
         cfg.suppressUnmaintainedWarning "deprecated"
-        (deprecated: ''${package.name} is deprecated software and recieves no \
-        updates or support.''));
-      warnDemo = package: (warnGeneral package 
+        (deprecated: "${package.name} is deprecated software and recieves no \
+        updates or support."));
+      warnDemo = package: (warnGeneral package
         cfg.suppressFreemiumWarning "demo"
-        (demo: ''${demo.name} is a paid product. You will only get the demo \
+        (demo: "${demo.name} is a paid product. You will only get the demo \
         functionality. Using the full version of ${demo.name} installed via \
-        this flake is untested.''));
+        this flake is untested."));
 
       warnings = [ warnDeprecated warnDemo ];
 
@@ -153,6 +169,19 @@ in
         "native-plugins-combined"
         { }
         nativePluginLnCommands;
+
+      # same thing but lv2 plugins
+      lv2LnCommands = ''
+        mkdir $out
+        ${
+        builtins.concatStringsSep "\n" 
+          (map toLnCommand cfg.lv2)
+        }
+      '';
+      lv2Plugins = pkgs.runCommandLocal
+        "lv2-plugins-combined"
+        { }
+        lv2LnCommands;
     in
     mkIf cfg.enable {
       home.packages = [ userYabridge cfg.package cfg.ctlPackage ];
@@ -166,7 +195,13 @@ in
           recursive = true;
         };
         "${cfg.vstDirectory}/native" = {
-          source = "${nativePlugins}";
+          source = nativePlugins;
+          recursive = true;
+        };
+
+        "${cfg.lv2Directory}" = {
+          source = lv2Plugins;
+          recursive = true;
         };
 
         ".config/yabridgectl" = {
