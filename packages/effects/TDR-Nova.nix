@@ -11,5 +11,10 @@ pkgs.stdenv.mkDerivation {
 
   nativeBuildInputs = [ pkgs.unzip ];
 
+  dontUnpack = false;
+  unpackPhase = ''
+    unzip $src
+  '';
+
   installPhase = "cp -r . $out";
 }
