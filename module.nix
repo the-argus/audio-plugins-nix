@@ -19,9 +19,9 @@ in
       description = "Paths to folders which contain plugins which will run natively on linux. They will be placed in the same folder as emulated VSTs.";
     };
 
-    supressUnmaintainedWarning = mkEnableOption "Stop the red warning/trace \
+    suppressUnmaintainedWarning = mkEnableOption "Stop the red warning/trace \
       messages when evaluating unmaintained packages.";
-    supressFreemiumWarning = mkEnableOption "Stop the red warning/trace \
+    suppressFreemiumWarning = mkEnableOption "Stop the red warning/trace \
       messages when evaluating packages which require a paid account to \
       unlock full features.";
 
@@ -70,11 +70,11 @@ in
           package);
 
       warnDeprecated = package: (warnGeneral package
-        cfg.supressUnmaintainedWarning "deprecated"
+        cfg.suppressUnmaintainedWarning "deprecated"
         (deprecated: ''${package.name} is deprecated software and recieves no \
         updates or support.''));
       warnDemo = package: (warnGeneral package 
-        cfg.supressFreemiumWarning "demo"
+        cfg.suppressFreemiumWarning "demo"
         (demo: ''${demo.name} is a paid product. You will only get the demo \
         functionality. Using the full version of ${demo.name} installed via \
         this flake is untested.''));
