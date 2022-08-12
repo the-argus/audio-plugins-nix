@@ -111,7 +111,8 @@ in
       yabridgeCommands = map toYabridgeCommand cfg.plugins;
 
       # edit yabridge config to explicitly include extraPath
-      escapedExtraPath = lib.strings.escape [ "/" ] cfg.extraPath;
+      escapedExtraPath = lib.strings.escape [ "/" " " "(" ")" "[" "]"
+        "{" "}" "\"" "\'" ] cfg.extraPath;
       patch =
         if cfg.extraPath != "" then
           ''
