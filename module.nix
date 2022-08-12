@@ -102,11 +102,9 @@ in
         (lib.lists.foldr (func: folded: (func folded)) package warnings);
 
       # functions to create commands for a package (and warn)
-      toCpCommand = package: "cp -r ${warn package} $out";
-      toLnCommand = package: "ln -sf ${warn package} $out";
-      toYabridgeCommand = package:
-        "${yabridgectl} add $out/${
-        (builtins.baseNameOf (toString package))}";
+      toCpCommand = package: "cp -r ${warn package} $out/${package.name}";
+      toLnCommand = package: "ln -sf ${warn package} $out${package.name}";
+      toYabridgeCommand = package: "${yabridgectl} add $out/${package.name}";
 
       # list of strings (commands) created from packages
       cpCommands = map toCpCommand cfg.plugins;
