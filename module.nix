@@ -56,9 +56,38 @@ in
       # binary to use
       yabridgectl = "${cfg.ctlPackage}/bin/yabridgectl";
 
-      # functions to create commands for a package
-      toCpCommand = package: "cp -r ${package} $out";
-      toLnCommand = package: "ln -sf ${package} $out";
+      # warn functions for certain licenses n stuff
+      warnGeneral = package: cancel: tag: warningFunc:
+        (if (builtins.hasAttr tag package &&
+          !cancel) then
+          if (package.${tag}) then
+            (lib.trivial.warn
+              (warningFunc package)
+              package)
+          else
+            package
+        else
+          package);
+
+      warnDeprecated = package: (warnGeneral package
+        cfg.supressUnmaintainedWarning "deprecated"
+        (deprecated: ''${package.name} is deprecated software and recieves no \
+        updates or support.''));
+      warnDemo = package: (warnGeneral package 
+        cfg.supressFreemiumWarning "demo"
+        (demo: ''${demo.name} is a paid product. You will only get the demo \
+        functionality. Using the full version of ${demo.name} installed via \
+        this flake is untested.''));
+
+      warnings = [ warnDeprecated warnDemo ];
+
+      # nest all the warnings into one function
+      warn = package:
+        (lib.lists.foldr (func: folded: (func folded)) package warnings);
+
+      # functions to create commands for a package (and warn)
+      toCpCommand = package: "cp -r ${warn package} $out";
+      toLnCommand = package: "ln -sf ${warn package} $out";
       toYabridgeCommand = package:
         "${yabridgectl} add $out/${
         (builtins.baseNameOf (toString package))}";
@@ -72,12 +101,12 @@ in
       patch =
         if cfg.extraPath != "" then
           ''
-          # try to replace line three (if there are very few plugins, ] is on same line)
-          # different versions use line 2 and 3 i think
-          sed -i "3s/\]$/,'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml
-          sed -i "2s/\]$/,'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml
-          # replace line containing only "]" with a new entry for extraPath
-          sed -i "s/^\]$/'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml
+            # try to replace line three (if there are very few plugins, ] is on same line)
+            # different versions use line 2 and 3 i think
+            sed -i "3s/\]$/,'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml
+            sed -i "2s/\]$/,'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml
+            # replace line containing only "]" with a new entry for extraPath
+            sed -i "s/^\]$/'${escapedExtraPath}']/" $out/config/yabridgectl/config.toml
           ''
         else "";
 

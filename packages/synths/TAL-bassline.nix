@@ -1,5 +1,4 @@
 { pkgs, ... }:
-pkgs.lib.trivial.warn ''TAL Bassline is deprecated software and recieves no updates or support.''
 pkgs.stdenv.mkDerivation {
   name = "TAL-bassline";
   src = pkgs.fetchurl {
@@ -8,6 +7,10 @@ pkgs.stdenv.mkDerivation {
   };
   
   sourceRoot = ".";
+  passthru = {
+    demo = false;
+    deprecated = true;
+  };
 
   nativeBuildInputs = [ pkgs.unzip ];
 

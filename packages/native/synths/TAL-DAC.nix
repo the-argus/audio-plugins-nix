@@ -1,6 +1,4 @@
 { pkgs, ... }:
-pkgs.lib.trivial.warn ''TAL DAC is a paid product. You will only get the demo functionality.
-Using the full version of TAL DAC installed via this flake is untested.''
 pkgs.stdenv.mkDerivation {
   name = "TAL-DAC";
   src = pkgs.fetchurl {
@@ -9,6 +7,11 @@ pkgs.stdenv.mkDerivation {
   };
 
   nativeBuildInputs = [ pkgs.unzip ];
+  
+  passthru = {
+    demo = true;
+    deprecated = false;
+  };
 
   installPhase =
     ''
