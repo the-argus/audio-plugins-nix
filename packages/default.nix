@@ -59,6 +59,9 @@ let
   # asb2m10
   dexed = import ./native/synths/dexed.nix { inherit pkgs; };
   dexed-bin = import ./native/synths/dexed-bin.nix { inherit pkgs; };
+
+  # TDR
+  tdr-nova = import ./effects/TDR-Nova.nix { inherit pkgs; };
 in
 {
   synths = {
@@ -78,6 +81,8 @@ in
     inherit tal-dub tal-dub-2 tal-dub-3 tal-bitcrusher tal-tube tal-use;
     # jerryuhoo
     inherit fire fire-bin;
+    # TDR
+    inherit tdr-nova;
   };
 
   native = {
