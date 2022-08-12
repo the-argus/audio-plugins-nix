@@ -105,7 +105,7 @@ in
       toCpCommand = package: "cp -r \"${warn package}\" \"$out/${package.name}\"";
       toLnCommand = package: 
       let 
-        command = "ln -sf \"${warn package}\" \"$out${package.name}\"";
+        command = "ln -sf \"${warn package}\" \"$out/${package.name}\"";
       in "echo ${command} && ${command}";
       toYabridgeCommand = package: "${yabridgectl} add \"$out/${package.name}\"";
 
