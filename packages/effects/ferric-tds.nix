@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation {
   name = "ferric-tds";
   src = pkgs.fetchurl {
@@ -7,7 +7,7 @@ pkgs.stdenv.mkDerivation {
     sha256 = "0mrfd7lm9wz4p2rq13m8d2279fdx5s9ai182flfy01ynmbm1w28w";
   };
 
-  nativeBuildInputs = [ pkgs.unzip ];
+  nativeBuildInputs = [pkgs.unzip];
 
   installPhase = "cp -r . $out";
 }

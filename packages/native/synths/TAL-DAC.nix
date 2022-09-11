@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation {
   name = "TAL-DAC";
   src = pkgs.fetchurl {
@@ -6,17 +6,16 @@ pkgs.stdenv.mkDerivation {
     sha256 = "0cv1cr21s45w6frrpxdiih5bcpy7x9zcnr0np6hns9qbwhaawx28";
   };
 
-  nativeBuildInputs = [ pkgs.unzip ];
-  
+  nativeBuildInputs = [pkgs.unzip];
+
   passthru = {
     demo = true;
     deprecated = false;
   };
 
-  installPhase =
-    ''
-      cp -r . $out
-    '';
+  installPhase = ''
+    cp -r . $out
+  '';
 
   sourceRoot = ".";
 }

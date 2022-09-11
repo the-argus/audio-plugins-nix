@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation {
   name = "TAL-Chorus";
   src = pkgs.fetchurl {
@@ -6,12 +6,11 @@ pkgs.stdenv.mkDerivation {
     sha256 = "1hgvy0nb9813znjf8hih10gjirzmhv6gjxyv68crs3wvspibyjha";
   };
 
-  nativeBuildInputs = [ pkgs.unzip ];
+  nativeBuildInputs = [pkgs.unzip];
 
-  installPhase =
-    ''
-      cp -r . $out
-    '';
+  installPhase = ''
+    cp -r . $out
+  '';
 
   sourceRoot = ".";
 }

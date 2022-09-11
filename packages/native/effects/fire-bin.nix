@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation {
   pname = "Fire-bin";
   version = "0.9.9";
@@ -7,12 +7,11 @@ pkgs.stdenv.mkDerivation {
     sha256 = "0sx1kx660kzj4kqcrxk0bw3swwv5lblv9kqk7hmpy39pbb8sfirj";
   };
 
-  nativeBuildInputs = [ pkgs.unzip ];
+  nativeBuildInputs = [pkgs.unzip];
 
-  installPhase =
-    ''
-      cp -r . $out
-    '';
+  installPhase = ''
+    cp -r . $out
+  '';
 
   sourceRoot = ".";
 }
