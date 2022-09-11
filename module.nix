@@ -186,7 +186,7 @@ in
         lv2LnCommands;
     in
     mkIf cfg.enable {
-      home.packages = [ userYabridge cfg.package cfg.ctlPackage ];
+      home.packages = [ cfg.ctlPackage ];
       home.file = {
         "${cfg.vstDirectory}/yabridge" = {
           source = "${userYabridge}/home/.vst3/yabridge";
