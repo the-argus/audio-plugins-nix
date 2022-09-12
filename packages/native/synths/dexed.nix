@@ -1,15 +1,15 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation rec {
-    pname = "dexed-synth";
-    version = "0.9.6";
-    src = pkgs.fetchgit {
-        url = "https://github.com/asb2m10/dexed";
-        rev = "2c036316bcd512818aa9cc8129767ad9e0ec7132";
-        sha256 = "sha256-ZLKPZPAjnqtZC8QD2FUxNLEMi2dYHLwVamERPU18Q/s=";
-        fetchSubmodules = true;
-        deepClone = true;
-    };
-  
+  pname = "dexed-synth";
+  version = "0.9.6";
+  src = pkgs.fetchgit {
+    url = "https://github.com/asb2m10/dexed";
+    rev = "2c036316bcd512818aa9cc8129767ad9e0ec7132";
+    sha256 = "sha256-ZLKPZPAjnqtZC8QD2FUxNLEMi2dYHLwVamERPU18Q/s=";
+    fetchSubmodules = true;
+    deepClone = true;
+  };
+
   enableParallelBuilding = true;
 
   configurePhase = ''
@@ -20,7 +20,11 @@ pkgs.stdenv.mkDerivation rec {
   '';
   buildPhase = ''
     pushd build
-    cmake --build . ${if enableParallelBuilding then "-j$NIX_BUILD_CORES" else ""}
+    cmake --build . ${
+      if enableParallelBuilding
+      then "-j$NIX_BUILD_CORES"
+      else ""
+    }
     popd
   '';
 

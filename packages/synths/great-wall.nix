@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation {
   name = "GreatWall";
   src = pkgs.fetchurl {
@@ -6,7 +6,7 @@ pkgs.stdenv.mkDerivation {
     sha256 = "18qgbyq0d6aclnyldjhfklz54az4b6pmdwkp5xkh98rk6ri2pmr5";
   };
 
-  nativeBuildInputs = [ pkgs.unzip ];
+  nativeBuildInputs = [pkgs.unzip];
 
   installPhase = "cp -r . $out";
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation {
   name = "TAL-Drum";
   src = pkgs.fetchurl {
@@ -8,12 +8,11 @@ pkgs.stdenv.mkDerivation {
 
   passthru.demo = true;
 
-  nativeBuildInputs = [ pkgs.unzip ];
+  nativeBuildInputs = [pkgs.unzip];
 
-  installPhase =
-    ''
-      cp -r . $out
-    '';
+  installPhase = ''
+    cp -r . $out
+  '';
 
   sourceRoot = ".";
 }

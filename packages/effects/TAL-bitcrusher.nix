@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation {
   name = "TAL-bitcrusher";
   src = pkgs.fetchurl {
@@ -7,10 +7,10 @@ pkgs.stdenv.mkDerivation {
   };
 
   passthru.deprecated = true;
-  
+
   sourceRoot = ".";
 
-  nativeBuildInputs = [ pkgs.unzip ];
+  nativeBuildInputs = [pkgs.unzip];
 
   installPhase = "cp -r . $out";
 }

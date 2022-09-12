@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation {
   name = "sota";
   src = pkgs.fetchurl {
@@ -6,7 +6,7 @@ pkgs.stdenv.mkDerivation {
     sha256 = "094r3c0kixrfxn7f4vqgah814qa5c8y66y1n7vlwwk58yl3r6aid";
   };
 
-  nativeBuildInputs = [ pkgs.unzip ];
+  nativeBuildInputs = [pkgs.unzip];
 
   installPhase = "cp -r . $out";
 }

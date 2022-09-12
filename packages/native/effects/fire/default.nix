@@ -1,45 +1,43 @@
-{ pkgs, ... }:
-let
+{pkgs, ...}: let
   pname = "Fire";
   version = "0.9.9";
 in
-pkgs.stdenv.mkDerivation
-{
-  inherit pname version;
+  pkgs.stdenv.mkDerivation
+  {
+    inherit pname version;
 
-  src = pkgs.fetchgit {
-    url = "https://github.com/jerryuhoo/Fire";
-    rev = "7bd2f52ffa8c85e3e2c38e15f4d434089f7d616a";
-    sha256 = "1ygsmmd0m20ak3qmjmw4mssljkippkjcw73m8g9a9d4dygjqsw4w";
-    fetchSubmodules = false;
-    deepClone = false;
-  };
+    src = pkgs.fetchgit {
+      url = "https://github.com/jerryuhoo/Fire";
+      rev = "7bd2f52ffa8c85e3e2c38e15f4d434089f7d616a";
+      sha256 = "1ygsmmd0m20ak3qmjmw4mssljkippkjcw73m8g9a9d4dygjqsw4w";
+      fetchSubmodules = false;
+      deepClone = false;
+    };
 
-  nativeBuildInputs = with pkgs; [
-    cmake
-    pkgconfig
-    git
-    xorg.libX11
-    xorg.libXrandr
-    xorg.libXinerama
-    xorg.libXext
-    xorg.libXcursor
-    freetype
+    nativeBuildInputs = with pkgs; [
+      cmake
+      pkgconfig
+      git
+      xorg.libX11
+      xorg.libXrandr
+      xorg.libXinerama
+      xorg.libXext
+      xorg.libXcursor
+      freetype
 
-    # extra modules
-    alsaLib
-    gtk3-x11
-    webkitgtk
+      # extra modules
+      alsaLib
+      gtk3-x11
+      webkitgtk
 
-    # pkgconfig
-    pcre
-  ];
+      # pkgconfig
+      pcre
+    ];
 
-  dontPatch = false;
-  patches = [ ./local-repositories.patch ];
+    dontPatch = false;
+    patches = [./local-repositories.patch];
 
-  postPatch =
-    let
+    postPatch = let
       juce-src = pkgs.fetchgit {
         url = "https://github.com/juce-framework/JUCE.git";
         rev = "4c43bf429e90690cb1f05b7c8a044cc9f5a59e7d";
@@ -69,8 +67,7 @@ pkgs.stdenv.mkDerivation
         deepClone = false;
         leaveDotGit = false;
       };
-    in
-    ''
+    in ''
       rmdir JUCE
       cp -r ${juce-src} ./JUCE
       cp -r ${rwq-src} ./readerwriterqueue
@@ -79,9 +76,9 @@ pkgs.stdenv.mkDerivation
       chmod +w ./readerwriterqueue -R
       chmod +w ./Catch2 -R
     '';
-  
-  installPhase = ''
-    mkdir $out
-    cp -r . $out
-  '';
-}
+
+    installPhase = ''
+      mkdir $out
+      cp -r . $out
+    '';
+  }

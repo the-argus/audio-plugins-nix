@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation {
   name = "meat-zone";
   src = pkgs.fetchurl {
@@ -6,7 +6,7 @@ pkgs.stdenv.mkDerivation {
     sha256 = "00s98yps8sxgpnkmp0ijz5qlrqcf4z2igfmg1di9vmiw2j5k4dz1";
   };
 
-  nativeBuildInputs = [ pkgs.unzip ];
+  nativeBuildInputs = [pkgs.unzip];
 
   installPhase = "cp -r . $out";
 }

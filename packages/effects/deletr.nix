@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation {
   name = "deletr";
   src = pkgs.fetchurl {
@@ -6,7 +6,7 @@ pkgs.stdenv.mkDerivation {
     sha256 = "1gd5xh4dqlr8qr1wbxb9765nrra16zfgz39h0m28q12ndv5q3lxh";
   };
 
-  nativeBuildInputs = [ pkgs.unzip ];
+  nativeBuildInputs = [pkgs.unzip];
 
   installPhase = "cp -r . $out";
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{pkgs, ...}:
 pkgs.stdenv.mkDerivation {
   name = "ouch";
   src = pkgs.fetchurl {
@@ -6,7 +6,7 @@ pkgs.stdenv.mkDerivation {
     sha256 = "1vzqc77775fdwjl2a8zrl7wfbcna1aa3aafbgf32nfgnnjr67wyx";
   };
 
-  nativeBuildInputs = [ pkgs.unzip ];
+  nativeBuildInputs = [pkgs.unzip];
 
   installPhase = "cp -r . $out";
 }

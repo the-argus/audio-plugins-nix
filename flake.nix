@@ -5,17 +5,15 @@
     nixpkgs.url = "nixpkgs/nixpkgs-unstable";
   };
 
-  outputs =
-    { self
-    , nixpkgs
-    , ...
-    }@inputs:
-    let
-      system = "x86_64-linux";
-      pkgs = import nixpkgs { inherit system; };
-    in
-    {
-      homeManagerModule = import ./module.nix;
-      mpkgs = import ./packages { inherit pkgs; };
-    };
+  outputs = {
+    self,
+    nixpkgs,
+    ...
+  } @ inputs: let
+    system = "x86_64-linux";
+    pkgs = import nixpkgs {inherit system;};
+  in {
+    homeManagerModule = import ./module.nix;
+    mpkgs = import ./packages {inherit pkgs;};
+  };
 }
