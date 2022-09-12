@@ -10,8 +10,12 @@
     nixpkgs,
     ...
   } @ inputs: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {inherit system;};
+    supportedSystems = [
+      "x86_64-linux"
+      "aarch64-linux"
+    ];
+    genSystems = nixpkgs.lib.genAttrs supportedSystems;
+    pkgs = genSystems (system: import nixpkgs {inherit system;});
   in {
     homeManagerModule = import ./module.nix;
     mpkgs = import ./packages {inherit pkgs;};
