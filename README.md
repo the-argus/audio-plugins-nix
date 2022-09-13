@@ -14,9 +14,9 @@ A nix flake providing a home-manager module for VST emulation with yabridge, and
     # and finally add the module to home-manager imports, and mpkgs to extraSpecialArgs:
     homeConfigurations.${username} = home-manager.lib.homeManagerConfiguration {
       configuration = {pkgs, ...}: {
-        imports = [ audio-plugins.homeManagerModule ];
+        imports = [ audio-plugins.homeManagerModules.${pkgs.system} ];
       };
-      extraSpecialArgs = inputs // { mpkgs = audio-plugins.mpkgs; };
+      extraSpecialArgs = inputs // { mpkgs = audio-plugins.mpkgSets.${pkgs.system}; };
     };
   };
 }

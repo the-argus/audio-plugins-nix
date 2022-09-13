@@ -16,8 +16,12 @@
     ];
     genSystems = nixpkgs.lib.genAttrs supportedSystems;
     pkgs = genSystems (system: import nixpkgs {inherit system;});
+
+    defaultSystem = "x86_64-linux";
   in {
-    homeManagerModule = import ./module.nix;
-    mpkgs = import ./packages {inherit pkgs;};
+    homeManagerModule = pkgs.${defaultSystem}.callPackage ./module.nix {};
+    homeManagerModules = genSystems (system: pkgs.${system}.callPackage ./module.nix {});
+    mpkgs = pkgs.${defaultSystem}.callPackage ./packages {};
+    mpkgSets = genSystems (system: pkgs.${system}.callPackage ./packages {});
   };
 }
