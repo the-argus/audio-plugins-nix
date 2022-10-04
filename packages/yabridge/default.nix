@@ -10,6 +10,9 @@
 , wine
 , libxcb
 , nix-update-script
+, wineWowPackages
+, libuuid
+, system
 }:
 
 let
@@ -116,6 +119,25 @@ in multiStdenv.mkDerivation rec {
 
   buildInputs = [
     libxcb
+    libuuid
+    (multiStdenv.mkDerivation {
+      pname = "winelib";
+      version = wine.version;
+      dontBuild = true;
+      src = wineWowPackages.unstableFull.out;
+      installPhase = let 
+        targetLib = 
+          if system == "x86_64-linux"
+            then "x86_64-unix"
+          else if system == "i686-linux"
+            then "i386-unix" # is this allowed?
+          else
+            (abort "System ${system} is not supported by this yabridge build.");
+      in ''
+        mkdir -p $out/lib
+        cp $src/lib/wine/${targetLib}/* $out/lib -r
+      '';
+    })
   ];
 
   mesonFlags = [
