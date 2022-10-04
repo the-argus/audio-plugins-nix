@@ -22,5 +22,7 @@
     homeManagerModule = import ./module.nix;
     mpkgs = pkgs.${defaultSystem}.callPackage ./packages {};
     mpkgSets = genSystems (system: pkgs.${system}.callPackage ./packages {});
+
+    yabridge = genSystems (system: pkgs.${system}.callPackage ./packages/yabridge {});
   };
 }
