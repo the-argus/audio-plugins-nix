@@ -60,7 +60,7 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs.yabridge;
+      default = pkgs.callPackage ./packages/yabridge {};
       description = "Nix package containing the yabridge binary.";
     };
     ctlPackage = mkOption {
