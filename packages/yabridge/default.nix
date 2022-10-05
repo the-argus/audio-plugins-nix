@@ -124,7 +124,7 @@ in multiStdenv.mkDerivation rec {
       pname = "winelib";
       version = wine.version;
       dontBuild = true;
-      src = wineWowPackages.unstableFull.out;
+      src = wineWowPackages.full.out;
       installPhase = let 
         targetLib = 
           if system == "x86_64-linux"
