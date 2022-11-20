@@ -163,7 +163,8 @@ in {
       for file in $(${pkgs.findutils}/bin/find $1 -print); do
         # do this unconditionally, patchelf doesnt err it just warns
         if [ -f $file ]; then
-          ${pkgs.patchelf}/bin/patchelf --add-rpath ${cfg.package}/lib $file
+          # if shared library, patch with new rpath
+          ${pkgs.elfutils.bin}/bin/eu-elfclassify --shared $(${pkgs.coreutils}/bin/readlink $file) && ${pkgs.patchelf}/bin/patchelf --add-rpath ${cfg.package}/lib $file
         fi
       done
     '';
