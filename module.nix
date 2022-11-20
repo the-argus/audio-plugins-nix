@@ -71,7 +71,7 @@ in {
 
   config = let
     # binary to use
-    yabridgectl = builtins.trace cfg.ctlPackage.version "${cfg.ctlPackage}/bin/yabridgectl";
+    yabridgectl = "${cfg.ctlPackage}/bin/yabridgectl";
 
     # warn functions for certain licenses n stuff
     warnGeneral = package: cancel: tag: warningFunc: (
@@ -157,9 +157,6 @@ in {
 
       # add all the copied plugin folders to yabridge
       ${builtins.concatStringsSep "\n" yabridgeCommands}
-
-      ${yabridgectl} --version
-      exit -1
 
       ${yabridgectl} sync
 
