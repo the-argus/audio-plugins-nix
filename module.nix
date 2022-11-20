@@ -171,6 +171,7 @@ in {
           fi
         fi
       done
+      exit -1
     '';
 
     userYabridge =
