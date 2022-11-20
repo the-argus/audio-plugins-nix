@@ -1,9 +1,5 @@
-pkgs: {
-  lib,
-  config,
-  ...
-}:
-with lib; let
+pkgs: {config, ...}:
+with pkgs.lib; let
   cfg = config.programs.yabridge;
 in {
   options.programs.yabridge = {
@@ -81,7 +77,7 @@ in {
       then
         if (package.${tag})
         then
-          (lib.trivial.warn
+          (pkgs.lib.trivial.warn
             (warningFunc package)
             package)
         else package
@@ -101,7 +97,7 @@ in {
     warnings = [warnDeprecated warnDemo];
 
     # nest all the warnings into one function
-    warn = package: (lib.lists.foldr (func: folded: (func folded)) package warnings);
+    warn = package: (pkgs.lib.lists.foldr (func: folded: (func folded)) package warnings);
 
     # functions to create commands for a package (and warn)
     toCpCommand = package: "cp -r \"${warn package}\" \"$out/${package.name}\"";
@@ -116,7 +112,7 @@ in {
 
     # edit yabridge config to explicitly include extraPath
     escapedExtraPath =
-      lib.strings.escape [
+      pkgs.lib.strings.escape [
         "/"
         " "
         "("
@@ -162,6 +158,12 @@ in {
 
       # adds extraPath
       ${patch}
+
+      #patch the contents of $out to have RPATHS that link to yabridge's lib
+      for file in $(${pkgs.findutils}/bin/find $1 -print); do
+        # do this unconditionally, patchelf doesnt err it just warns
+        ${pkgs.patchelf}/bin/patchelf --add-rpath ${cfg.package}/lib $file
+      done
     '';
 
     userYabridge =
