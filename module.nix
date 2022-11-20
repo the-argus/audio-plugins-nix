@@ -162,7 +162,9 @@ in {
       #patch the contents of $out to have RPATHS that link to yabridge's lib
       for file in $(${pkgs.findutils}/bin/find $1 -print); do
         # do this unconditionally, patchelf doesnt err it just warns
-        ${pkgs.patchelf}/bin/patchelf --add-rpath ${cfg.package}/lib $file
+        if [ -f $file ]; then
+          ${pkgs.patchelf}/bin/patchelf --add-rpath ${cfg.package}/lib $file
+        fi
       done
     '';
 
