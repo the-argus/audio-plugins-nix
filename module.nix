@@ -153,18 +153,18 @@ in {
       export HOME=$out/home
       echo "setting yabridgectl path"
       ${yabridgectl} set --path="${cfg.package}/lib"
-      
+
       echo "copying vst plugin folders to $out"
       # copy all vst plugin folders to out directory
       ${builtins.concatStringsSep "\n" cpCommands}
-      
+
       echo "registering folders with yabridge"
       # add all the copied plugin folders to yabridge
       ${builtins.concatStringsSep "\n" yabridgeCommands}
-      
+
       echo "yabridge sync"
       ${yabridgectl} sync
-        
+
       echo "patching yabridge config..."
       # adds extraPath
       ${patch}
