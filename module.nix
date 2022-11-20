@@ -158,7 +158,7 @@ in {
       # add all the copied plugin folders to yabridge
       ${builtins.concatStringsSep "\n" yabridgeCommands}
 
-      yabridgectl --version
+      ${yabridgectl} --version
       exit -1
 
       ${yabridgectl} sync
