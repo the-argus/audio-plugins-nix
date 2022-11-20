@@ -15,7 +15,8 @@
 
     defaultSystem = "x86_64-linux";
   in {
-    homeManagerModule = import ./module.nix;
+    homeManagerModule = (import ./module.nix) pkgs.${defaultSystem};
+    homeManagerModules = genSystems (system: (import ./module.nix) pkgs.${system});
     mpkgs = pkgs.${defaultSystem}.callPackage ./packages {};
     mpkgSets = genSystems (system: pkgs.${system}.callPackage ./packages {});
   };

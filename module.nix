@@ -1,5 +1,4 @@
-{
-  pkgs,
+pkgs: {
   lib,
   config,
   ...
