@@ -160,7 +160,7 @@ in {
       ${patch}
 
       #patch the contents of $out to have RPATHS that link to yabridge's lib
-      for file in $(${pkgs.findutils}/bin/find . -print); do
+      for file in $(${pkgs.findutils}/bin/find $out -print); do
         # do this unconditionally, patchelf doesnt err it just warns
         if [ -f $file ]; then
           # if shared library, patch with new rpath
