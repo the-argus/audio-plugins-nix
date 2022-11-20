@@ -164,8 +164,8 @@ in {
         # do this unconditionally, patchelf doesnt err it just warns
         if [ -f $file ]; then
           # if shared library, patch with new rpath
-          echo "running ${"${pkgs.elfutils.bin}/bin/eu-elfclassify --shared $(${pkgs.coreutils}/bin/readlink $file)"}"
-          ${pkgs.elfutils.bin}/bin/eu-elfclassify --shared $(${pkgs.coreutils}/bin/readlink $file) && ${pkgs.patchelf}/bin/patchelf --add-rpath ${cfg.package}/lib $file
+          echo "running ${"${pkgs.elfutils.bin}/bin/eu-elfclassify --shared"} $file"
+          ${pkgs.elfutils.bin}/bin/eu-elfclassify --shared $file && ${pkgs.patchelf}/bin/patchelf --add-rpath ${cfg.package}/lib $file
         fi
       done
     '';
