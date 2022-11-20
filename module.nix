@@ -90,7 +90,7 @@ in {
 
     warnDeprecated = package: (warnGeneral package
       cfg.suppressUnmaintainedWarning "deprecated"
-      (deprecated: "${package.name} is deprecated software and recieves no \
+      (deprecated: "${deprecated.name} is deprecated software and recieves no \
         updates or support."));
     warnDemo = package: (warnGeneral package
       cfg.suppressFreemiumWarning "demo"
@@ -157,6 +157,9 @@ in {
 
       # add all the copied plugin folders to yabridge
       ${builtins.concatStringsSep "\n" yabridgeCommands}
+
+      yabridgectl --version
+      exit -1
 
       ${yabridgectl} sync
 
