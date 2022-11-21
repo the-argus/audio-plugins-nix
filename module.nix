@@ -55,12 +55,12 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs.yabridge;
+      default = pkgs.yabridge.override {wine = pkgs.wine-staging;};
       description = "Nix package containing the yabridge binary.";
     };
     ctlPackage = mkOption {
       type = types.package;
-      default = pkgs.yabridgectl;
+      default = pkgs.yabridgectl.override {wine = pkgs.wine-staging;};
       description = "Nix package containing the yabridgectl binary.";
     };
   };
