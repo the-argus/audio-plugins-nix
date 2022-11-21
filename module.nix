@@ -160,6 +160,7 @@ in {
       ${patch}
 
       #patch the contents of $out to have RPATHS that link to yabridge's lib
+      ${pkgs.coreutils-full}/bin/chmod +w+r $out -R
       for file in $(${pkgs.findutils}/bin/find $out -print); do
         # do this unconditionally, patchelf doesnt err it just warns
         if [ -f $file ]; then
