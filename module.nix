@@ -160,18 +160,18 @@ in {
       ${patch}
 
       #patch the contents of $out to have RPATHS that link to yabridge's lib
-      ${pkgs.coreutils-full}/bin/chmod +w+r $out -R
-      for file in $(${pkgs.findutils}/bin/find $out -print); do
-        # do this unconditionally, patchelf doesnt err it just warns
-        if [ -f $file ]; then
-          # if shared library, patch with new rpath
-          echo "running ${"${pkgs.elfutils.bin}/bin/eu-elfclassify --shared"} $file"
-          if ${pkgs.elfutils.bin}/bin/eu-elfclassify --shared $file; then
-            echo "found $file to be an elf shared lib"
-            ${pkgs.patchelf}/bin/patchelf --add-rpath ${cfg.package}/lib $file
-          fi
-        fi
-      done
+      # ${pkgs.coreutils-full}/bin/chmod +w+r $out -R
+      # for file in $(${pkgs.findutils}/bin/find $out -print); do
+      #   # do this unconditionally, patchelf doesnt err it just warns
+      #   if [ -f $file ]; then
+      #     # if shared library, patch with new rpath
+      #     echo "running ${"${pkgs.elfutils.bin}/bin/eu-elfclassify --shared"} $file"
+      #     if ${pkgs.elfutils.bin}/bin/eu-elfclassify --shared $file; then
+      #       echo "found $file to be an elf shared lib"
+      #       ${pkgs.patchelf}/bin/patchelf --add-rpath ${cfg.package}/lib $file
+      #     fi
+      #   fi
+      # done
     '';
 
     userYabridge =
