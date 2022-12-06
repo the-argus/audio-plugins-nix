@@ -55,7 +55,7 @@ in {
 
     package = mkOption {
       type = types.package;
-      default = pkgs.yabridge.override;
+      default = pkgs.yabridge;
       description = "Nix package containing the yabridge binary.";
     };
     ctlPackage = mkOption {
