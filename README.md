@@ -3,6 +3,14 @@
 A nix flake providing a home-manager module for VST emulation with yabridge, and
 a set of packaged audio plugins.
 
+## WARNING
+
+These are very proprietary plugins that I'm packaging, and they don't typically
+allow hosting the plugins yourself. As a result, the download source is often an
+unstable link. You may encounter incorrect hash errors for certain plugins, or
+find that others fail to download altogether (Ferric-TDS is, horrifically,
+downloaded from a *google drive* link).
+
 ## example usage
 
 ``flake.nix``:
