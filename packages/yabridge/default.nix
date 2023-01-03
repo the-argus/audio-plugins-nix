@@ -7,7 +7,7 @@
 , meson
 , ninja
 , pkg-config
-, wine
+, wine-staging
 , libxcb
 , nix-update-script
 , wineWowPackages
@@ -92,7 +92,8 @@ in multiStdenv.mkDerivation rec {
     (substituteAll {
       src = ./hardcode-dependencies.patch;
       libxcb32 = pkgsi686Linux.xorg.libxcb;
-      inherit libnotify wine;
+      inherit libnotify;
+      wine = wine-staging;
     })
 
     # Patch the chainloader to search for libyabridge through NIX_PROFILES
@@ -114,7 +115,7 @@ in multiStdenv.mkDerivation rec {
     meson
     ninja
     pkg-config
-    wine
+    wine-staging
   ];
 
   buildInputs = [
@@ -122,7 +123,7 @@ in multiStdenv.mkDerivation rec {
     libuuid
     (multiStdenv.mkDerivation {
       pname = "winelib";
-      version = wine.version;
+      version = wine-staging.version;
       dontBuild = true;
       src = (wineWowPackages.stagingFull.overrideAttrs {
         src = fetchgit {
@@ -170,7 +171,7 @@ in multiStdenv.mkDerivation rec {
   postFixup = ''
     for exe in "$out"/bin/*.exe; do
       substituteInPlace "$exe" \
-        --replace 'WINELOADER="wine"' 'WINELOADER="${wine}/bin/wine"'
+        --replace 'WINELOADER="wine"' 'WINELOADER="${wine-staging}/bin/wine"'
     done
   '';
 
