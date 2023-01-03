@@ -124,7 +124,17 @@ in multiStdenv.mkDerivation rec {
       pname = "winelib";
       version = wine.version;
       dontBuild = true;
-      src = wineWowPackages.full.out;
+      src = (wineWowPackages.stagingFull.overrideAttrs {
+        src = fetchgit {
+          url = "git://source.winehq.org/git/wine.git";
+        };
+        src = fetchFromGitHub {
+    owner = "robbert-vdh";
+    repo = pname;
+    rev = version;
+    sha256 = "sha256-rce6gxnB+RpG84Xakw0h4vZ8lyEQ41swWQGuwpomV2I=";
+        };
+      }).out;
       installPhase = let 
         targetLib = 
           if system == "x86_64-linux"
