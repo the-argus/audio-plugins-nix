@@ -3,7 +3,7 @@ pkgs.stdenv.mkDerivation {
   name = "TAL-Noisemaker";
   src = pkgs.fetchurl {
     url = "https://tal-software.com/downloads/plugins/TAL-NoiseMaker_64_linux.zip";
-    sha256 = "14ja3h4404kfznryf9ncaxy8xmqznzi5xw0im49sz1gk5k6cv591";
+    sha256 = "sha256-MoVl5kb5jxTdkxoz+kOKTJ7dxFHnWbktEAX0M2+j/SA=";
   };
 
   nativeBuildInputs = [pkgs.unzip];
