@@ -3,7 +3,7 @@ pkgs.stdenv.mkDerivation {
   name = "TAL-Filter-2";
   src = pkgs.fetchurl {
     url = "https://tal-software.com/downloads/plugins/TAL-Filter-2_64_linux.zip";
-    sha256 = "18bzz3265gfk733psvwyhfdx3m3gyx7fq4217h3mhv5h2ngmdgxa";
+    sha256 = "sha256-ymwvK21o3+FgqKcjVJ5R0qdFBbPPjEYlgL9QAfOEe+k=";
   };
 
   nativeBuildInputs = [pkgs.unzip];
