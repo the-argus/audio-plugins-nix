@@ -2,11 +2,19 @@
 pkgs.stdenv.mkDerivation {
   name = "ill-logic";
   src = pkgs.fetchurl {
-    url = "https://heckscaper.com/plugins/ill/illlogicmaths_vst364_2021_05_30b.zip";
-    sha256 = "0mcihcrg98ngkb75v5c8vaqkpqkm57qw5wwbs8nwbfpsx8s7mv8a";
+    url = "https://heckscaper.com/ct/s/ill_vst364_2021_05_30b.zip";
+    sha256 = "1hkgl440rbrg5q6ljpzrk63qnl6zzyvyp29zpijnhn2mimfw197r";
   };
 
   nativeBuildInputs = [pkgs.unzip];
 
-  installPhase = "cp -r . $out";
+  unpackPhase = ''
+    unzip $src
+  '';
+
+  installPhase = ''
+    mkdir -p $out
+    cp -r illlogicmaths/* $out
+    cp -r manual $out
+  '';
 }
