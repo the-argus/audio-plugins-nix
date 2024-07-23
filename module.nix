@@ -146,6 +146,7 @@ in {
       export WINEPREFIX=$out/wine
       export XDG_CONFIG_HOME=$out/config
       export HOME=$out/home
+      export RUST_BACKTRACE=1
       ${yabridgectl} set --path="${cfg.package}/lib"
 
       # copy all vst plugin folders to out directory
