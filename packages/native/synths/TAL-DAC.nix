@@ -3,7 +3,7 @@ pkgs.stdenv.mkDerivation {
   name = "TAL-DAC";
   src = pkgs.fetchurl {
     url = "https://tal-software.com/downloads/plugins/TAL-DAC_64_linux.zip";
-    sha256 = "0cv1cr21s45w6frrpxdiih5bcpy7x9zcnr0np6hns9qbwhaawx28";
+    sha256 = "sha256-/7JDVxEfOQRqiCGPkejmPkbtnk3HqS/QgTskKz7Zfpc=";
   };
 
   nativeBuildInputs = [pkgs.unzip];
