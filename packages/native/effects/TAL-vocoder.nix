@@ -3,7 +3,7 @@ pkgs.stdenv.mkDerivation {
   name = "TAL-Vocoder";
   src = pkgs.fetchurl {
     url = "https://tal-software.com/downloads/plugins/TAL-Vocoder-2_64_linux.zip";
-    sha256 = "18laha2dy10iw0s751qb9xqv7lz1m0aylys603c0hhzrr267xxxc";
+    sha256 = "sha256-vOSpQqN8DEK4f5vISeQnZBpxhW3AaW1+/0ImajeoPsY=";
   };
 
   nativeBuildInputs = [pkgs.unzip];
