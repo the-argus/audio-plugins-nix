@@ -8,5 +8,13 @@ pkgs.stdenv.mkDerivation {
 
   nativeBuildInputs = [pkgs.unzip];
 
-  installPhase = "cp -r . $out";
+  unpackPhase = ''
+    unzip $src
+  '';
+
+  installPhase = ''
+    mkdir -p $out
+    cp -r ambiVAC/* $out
+    cp -r manual $out
+  '';
 }
