@@ -3,7 +3,7 @@ pkgs.stdenv.mkDerivation {
   name = "TAL-Reverb-4";
   src = pkgs.fetchurl {
     url = "https://tal-software.com/downloads/plugins/TAL-Reverb-4_64_linux.zip";
-    sha256 = "sha256-psBDOyquLrLcMUHQzAU1uAdKLsfVD+oiSgqrSUP0F0o=";
+    sha256 = "sha256-sI2r0JHXUzUBHJqODINud7Ovj8C4iE1LzRYm/LUVW7o=";
   };
 
   nativeBuildInputs = [pkgs.unzip];
