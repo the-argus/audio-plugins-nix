@@ -2,11 +2,19 @@
 pkgs.stdenv.mkDerivation {
   name = "psykic";
   src = pkgs.fetchurl {
-    url = "https://heckscaper.com/plugins/psy/psykic_vst364_2021_05_29.zip";
-    sha256 = "0mkmq3yhfipir52x1bbhs895hsihawyaxps3cj9wsmpzagy2dwz3";
+    url = "https://heckscaper.com/ct/s/psy_vst364_2021_05_29.zip";
+    sha256 = "1648dmnh8h6piccl4k0j0hfjnc4x3ilw2pc19s5y89mvl1w978hh";
   };
 
   nativeBuildInputs = [pkgs.unzip];
 
-  installPhase = "cp -r . $out";
+  unpackPhase = ''
+    unzip $src
+  '';
+
+  installPhase = ''
+    mkdir -p $out
+    cp -r psykic/* $out
+    cp -r psy_manual $out
+  '';
 }
