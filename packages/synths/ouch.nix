@@ -2,11 +2,19 @@
 pkgs.stdenv.mkDerivation {
   name = "ouch";
   src = pkgs.fetchurl {
-    url = "https://heckscaper.com/plugins/ouch/ouch_vst364_2021_05_30.zip";
-    sha256 = "1vzqc77775fdwjl2a8zrl7wfbcna1aa3aafbgf32nfgnnjr67wyx";
+    url = "https://heckscaper.com/ct/j/ouch_vst364_2021_05_30.zip";
+    sha256 = "07cwrvjrsck9sdm0mbjqdmgy3v5hjbqszwqsv2bznkbl86cp83qy";
   };
 
   nativeBuildInputs = [pkgs.unzip];
 
-  installPhase = "cp -r . $out";
+  unpackPhase = ''
+    unzip $src
+  '';
+
+  installPhase = ''
+    mkdir -p $out
+    cp -r ouch/* $out
+    cp -r ouch_manual $out
+  '';
 }
