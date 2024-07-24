@@ -47,6 +47,9 @@
   tal-chorus = import ./native/effects/TAL-chorus.nix {inherit pkgs;};
   tal-vocoder = import ./native/effects/TAL-vocoder.nix {inherit pkgs;};
 
+  # AIRWINDOWS
+  derez2 = import ./native/effects/airwindows/derez2 {inherit pkgs;};
+
   # VARIETY OF SOUND ----------------------------------------------------------
   # found at https://varietyofsound.wordpress.com/downloads/
   ferric-tds = import ./effects/ferric-tds.nix {inherit pkgs;};
@@ -113,6 +116,9 @@ in {
         ;
     };
     effects = {
+      # airwindows
+      inherit derez2;
+
       # TAL
       inherit tal-reverb-4 tal-filter-2 tal-vocoder tal-chorus;
 
